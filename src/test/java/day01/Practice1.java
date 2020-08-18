@@ -2,11 +2,13 @@ package day01;
 import io.restassured.RestAssured;
 import io.restassured.matcher.ResponseAwareMatcher;
 import io.restassured.response.Response;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import static io.restassured.RestAssured.* ;
 import static io.restassured.matcher.RestAssuredMatchers.* ;
 import static org.hamcrest.Matchers.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 
 public class Practice1 {
@@ -42,8 +44,41 @@ public class Practice1 {
         // we can use       response.header("the header name goes here )
         // or we can use    response.getHeader("the header name goes here )
         System.out.println("Getting the value of date header " + response.header("Date") ) ;
+        System.out.println("Getting the value of date header " + response.getHeader("Date") ) ;
+
+        // try to get Content-Type header value and Content-Length header value
+        System.out.println("Content-Type header " + response.header("Content-Type") );
+        System.out.println("Content-Length header " + response.header("Content-Length") );
+
+        // content-type is so common in pretty much all requests so there is a built support for this header
+        // by directly calling a method
+        System.out.println( response.contentType() );
+        System.out.println( response.getContentType() );
+
 
     }
+
+    @DisplayName("Testing /hello endpoint")
+    @Test
+    public void testHello(){
+
+        Response response = get("http://54.174.216.245:8000/api/hello") ;
+        // testing the status code returned correctly
+        assertEquals(200, response.statusCode() );
+        // testing the Content-Type header value is : text/plain;charset=UTF-8
+        assertEquals("text/plain;charset=UTF-8" , response.header("Content-Type"));
+        // alternatively use getHeader
+        assertEquals("text/plain;charset=UTF-8" , response.getHeader("Content-Type"));
+        // alternatively use response.contentType() or response.getContentType()
+        assertEquals("text/plain;charset=UTF-8" , response.contentType() ) ;
+        // testing the Content-length header value is : 17
+        assertEquals(17 , response.header("Content-length") );
+
+
+
+
+    }
+
 
 
 
