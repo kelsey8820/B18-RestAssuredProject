@@ -65,13 +65,13 @@ public class RestAssuredMethodChaining {
                         // you can chain multiple assertions
                         // if any assertions fail , whole test fail.
 
-            given().  // add all your request specific information like header, query param, path var, body
-                    header("Accept","application/xml").
-            when().
-                    get("http://54.174.216.245:8000/api/spartans").
+            given()  // add all your request specific information like header, query param, path var, body
+                    .header("Accept","application/xml").
+            when()
+                    .get("http://54.174.216.245:8000/api/spartans").
                     prettyPeek().
-            then().
-                    statusCode( is(200) ) ;
+            then()
+                    .statusCode( is(200) ) ;
 
     }
 
