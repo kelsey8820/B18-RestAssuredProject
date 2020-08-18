@@ -102,6 +102,30 @@ public class Practice1 {
 
     }
 
+    @DisplayName("Printing the response body using method")
+    @Test
+    public void printingBody(){
+        Response response = get("http://54.174.216.245:8000/api/hello");
+        // easy way to print the response body and return at the same time
+        //response.prettyPrint();
+
+        System.out.println("=================================");
+        // another way to see the response quick is prettyPeek
+        // it print out the entire response
+        // it will include all header , status code , body
+        // Most importantly , it return same Response object rather than String like prettyPrint
+        // it will enable you to call more method of response object after peeking
+        //response.prettyPeek();
+        System.out.println("=================================");
+        // I want to see entire response + save the status code into a variable in same statement
+
+        int statusCode =   response.prettyPeek().statusCode();
+        System.out.println("PRINTING ONLY STATUS CODE " + statusCode );
+
+    }
+
+
+
 
 
 
