@@ -55,6 +55,15 @@ public class RestAssuredMethodChaining {
     @Test
     public void testAllSpartans(){
 
+            // given part -- RequestSpecification
+                        // you can add information like header, query param, path var, body
+                        // if this request need authentication , it also goes to give section
+            // when part --- Send Request(GET POST PUT DELETE)
+        //                  --Get response
+            // then part -- ValidatableResponse
+                        // this is where assertions start
+                        // you can chain multiple assertions
+                        // if any assertions fail , whole test fail.
 
             given().  // add all your request specific information like header, query param, path var, body
                     header("Accept","application/xml").
