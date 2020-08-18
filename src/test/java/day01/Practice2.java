@@ -31,9 +31,20 @@ public class Practice2 {
             //  is( some value )
             // equalTo( some value)
             //  or optionally   is ( equalTo(some value) )
+            // not
 
         assertThat( num1 + num2 ,  is(9)   );
         assertThat( num1 + num2 ,  equalTo(9)   );
+        assertThat(num1+num2,    is (equalTo(9) ) ) ;
+
+        // not( value )
+        // is( not (some value ) )
+        // not( equalTo(11) )
+        assertThat(num1+num2 , not(11) );
+        assertThat(num1+num2, is( not(11) ) );
+
+        // save your first name and last name into 2 variables
+        // test the concatenation result using hamcrest matcher
 
 
     }
