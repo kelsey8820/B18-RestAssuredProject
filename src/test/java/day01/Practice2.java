@@ -79,15 +79,15 @@ public class Practice2 {
         // checking the list contains 11
         assertThat(numList, hasItem(11) );
 
-        // has items is used to check multiple items
-        assertThat(numList, hasItems(11,3,5) );
-        //
+        // has items is used to check multiple items : 11, 3, 5
+        assertThat(numList, hasItems(11,3,5));
+
+        // contains method works like equals here
         // checking the list contains all the items in exact order : 11,44,3,55,88,5
         assertThat(numList, contains(11,44,3,55,88,5 )   );
 
         // checking the list contains all the items in any order  : 11, 44, 55,3,88
         assertThat(numList,  containsInAnyOrder(11, 44, 55,3,88,5 )   );
-
 
 
     }
