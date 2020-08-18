@@ -83,6 +83,22 @@ public class Practice1 {
     public void testingHelloResponseBody(){
 
         // get the body and assert the body equal to Hello from Sparta
+        Response response = get("http://54.174.216.245:8000/api/hello");
+
+        // getting the body as String using asString method of Response object
+        System.out.println( response.asString()  );
+        // getting the body by calling body method
+        // PLEASE DO NOT USE TOSTRING -- IT DOES NOT GIVE YOU THE CONTENT
+        // THAT'S WHY ASSTRING METHOD EXISTS
+        System.out.println( response.body().asString()   );
+
+        // assert the body is Hello from Sparta , length is 17
+        String helloBody = response.asString() ;
+
+        assertEquals("Hello from Sparta" , helloBody );
+        //asserting the length is 17
+        assertEquals(17, helloBody.length() );
+
 
     }
 
