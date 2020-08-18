@@ -60,24 +60,33 @@ public class Practice1 {
 
     @DisplayName("Testing /hello endpoint")
     @Test
-    public void testHello(){
+    public void testHello() {
 
-        Response response = get("http://54.174.216.245:8000/api/hello") ;
+        Response response = get("http://54.174.216.245:8000/api/hello");
         // testing the status code returned correctly
-        assertEquals(200, response.statusCode() );
+        assertEquals(200, response.statusCode());
         // testing the Content-Type header value is : text/plain;charset=UTF-8
-        assertEquals("text/plain;charset=UTF-8" , response.header("Content-Type"));
+        assertEquals("text/plain;charset=UTF-8", response.header("Content-Type"));
         // alternatively use getHeader
-        assertEquals("text/plain;charset=UTF-8" , response.getHeader("Content-Type"));
+        assertEquals("text/plain;charset=UTF-8", response.getHeader("Content-Type"));
         // alternatively use response.contentType() or response.getContentType()
-        assertEquals("text/plain;charset=UTF-8" , response.contentType() ) ;
+        assertEquals("text/plain;charset=UTF-8", response.contentType());
         // testing the Content-length header value is : 17
-        assertEquals(17 , response.header("Content-length") );
-
-
+        // response.header("Content-length") give us a string result so we need to do string comparision
+        assertEquals("17", response.header("Content-length"));
 
 
     }
+
+    @DisplayName("Testing /hello endpoint body")
+    @Test
+    public void testingHelloResponseBody(){
+
+        // get the body and assert the body equal to Hello from Sparta
+
+    }
+
+
 
 
 
