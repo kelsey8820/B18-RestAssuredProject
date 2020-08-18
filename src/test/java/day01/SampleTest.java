@@ -1,3 +1,4 @@
+package day01;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
@@ -32,6 +33,10 @@ public class SampleTest {
         // write a simple assertion
         // concatenate your first name and last name
         // and make assertion it's equal to your full name
+        String firstName = "Sedat";
+        String lastName = "Tore";
+
+        assertEquals("Sedat Tore", firstName+" "+ lastName);
 
     }
 
