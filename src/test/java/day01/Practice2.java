@@ -45,6 +45,22 @@ public class Practice2 {
 
         // save your first name and last name into 2 variables
         // test the concatenation result using hamcrest matcher
+        String firstName = "Kaisar "; // there is a space in last character here
+        String lastName = "Anvar";
+
+        assertThat(firstName+lastName, is("Kaisar Anvar")  );
+        assertThat(firstName+lastName, equalTo("Kaisar Anvar")  );
+        assertThat(firstName+lastName, is( equalTo("Kaisar Anvar"))  );
+
+        // String matchers
+        // equalToIgnoringCase
+        // equalToCompressingWhiteSpace
+        //containsString, endsWith, startsWith - test string matching
+
+        // how to check in caseInsenstive manner
+        assertThat(firstName , equalToIgnoringCase("kaisar ") );
+        // how to ignore all whitespaces
+        assertThat(firstName, equalToCompressingWhiteSpace("Kaisar"));
 
 
     }
