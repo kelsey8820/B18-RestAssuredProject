@@ -1,6 +1,7 @@
 package day02;
 
 import io.restassured.RestAssured;
+import io.restassured.http.ContentType;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -32,6 +33,7 @@ public class OpenMovieDB_Test {
         then()
                 .log().all()
                 .statusCode(200)
+                .contentType(ContentType.JSON)
                 // checking title contains Boss Baby
                 // if you are searching for exact match use is equalTo
                 .body("Title" , containsString("Boss Baby") )
