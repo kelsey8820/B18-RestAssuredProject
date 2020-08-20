@@ -20,6 +20,16 @@ public class SpartanTest2 {
         RestAssured.basePath = "/api" ;
 
     }
+
+    @DisplayName("Get 1 Spartan Test")
+    @Test
+    public void testSingleSpartan(){
+
+
+
+
+    }
+
     // quick tasks
     // add another test for hello endpoint by reusing the baseURI , basePath above
     // specify you want to get a text result back
