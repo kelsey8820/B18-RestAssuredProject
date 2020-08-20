@@ -35,7 +35,8 @@ public class OpenMovieDB_Test {
                 // checking title contains Boss Baby
                 // if you are searching for exact match use is equalTo
                 .body("Title" , containsString("Boss Baby") )
-
+                .body("Ratings[0].Value" , is("6.3/10") )
+                .body("Ratings[-1].Value" , is("50/100"))
 
         ;
 
