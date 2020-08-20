@@ -35,11 +35,12 @@ public class ZipCodeTest {
                 .log().all()
                 .statusCode(is(200))
                 .contentType(ContentType.JSON)
+                // FX FOR THE SPACE IN THE KEY
+                .body("'post code'", is("22030")    )
                 .body("country",is("United States") )
                 // get the state and check it's Virginia
-                .body("places[0].state" , is("Virginia") )
-                // FX FOR THE SPACE IN THE KEY
-                .body("'post code'", is("22030") )
+                .body("places[0].state" , is("Virginia")    )
+
 
                 ;
 
