@@ -26,6 +26,7 @@ public class ZipCodeTest {
     @DisplayName("Zip to City Test")
     public void testZipToCity(){
 
+
         given()
                 .pathParam("zip",22030).
                 log().all().
@@ -39,11 +40,32 @@ public class ZipCodeTest {
                 .body("'post code'", is("22030")    )
                 .body("country",is("United States") )
                 // get the state and check it's Virginia
-                .body("places[0].state" , is("Virginia")    )
-
+                .body("places[0].state" , is("Virginia")   )
+                // get the place name
+                .body("places[0].'place name' " , is("Fairfax") )
 
                 ;
+        // if a field/key you are trying to get has space
+        // then add ''  for example  " 'post code'
 
+
+
+    }
+
+    @DisplayName("City to Zip")
+    @Test
+    public void testCityToZip(){
+
+    //api.zippopotam.us/us/:state/:city
+        given()
+                .pathParam("state","VA")
+                .pathParam("city","Fairfax")
+                .log().all().
+        when()
+                .get("{state}/{city}").
+        then()
+                .log().all()
+                .statusCode( is(200) ) ;
 
 
     }
