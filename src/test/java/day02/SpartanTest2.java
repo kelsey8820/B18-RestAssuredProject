@@ -40,9 +40,10 @@ public class SpartanTest2 {
                 .statusCode( is(200))
 
                 ;
-
-
     }
+
+
+
 
     // quick tasks
     // add another test for hello endpoint by reusing the baseURI , basePath above
