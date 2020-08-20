@@ -46,7 +46,7 @@ public class RestAssuredMethodChaining {
                 statusCode( is(200) ).        // asserting status code is 200
                 header("Content-Length",  equalTo("17") ).
                 header("Content-Type", is("text/plain;charset=UTF-8") ).
-                body( is("Hello from Sparta!") );
+                body( is("Hello from Sparta") );
                     ;  // asserting header is "17"
         ;
 
@@ -65,13 +65,14 @@ public class RestAssuredMethodChaining {
                         // you can chain multiple assertions
                         // if any assertions fail , whole test fail.
 
-            given()  // add all your request specific information like header, query param, path var, body
-                    .header("Accept","application/xml").
-            when()
-                    .get("http://54.174.216.245:8000/api/spartans").
+            given().
+                    header("Accept","application/xml").
+            when().
+                    get("http://54.174.216.245:8000/api/spartans").
                     prettyPeek().
-            then()
-                    .statusCode( is(200) ) ;
+            then().
+                    statusCode( is(200) )
+            ;
 
     }
 
