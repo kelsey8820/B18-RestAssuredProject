@@ -45,13 +45,15 @@ public class SpartanTest {
         given()
                 .baseUri("http://54.174.216.245:8000")  // alternative way of doing it
                 .basePath("/api")
-                .accept("application/json").
+//                .accept("application/json").
+                .accept(ContentType.JSON).
         when()
                 .get("/spartans").
         then()
                 .statusCode( is(200) )
                 //.contentType("application/json;charset=UTF-8")
                 //.contentType( is("application/json;charset=UTF-8")  )
+                // easiest way for contentType is using ContentType enum
                 .contentType( ContentType.JSON )  ;
 
 
