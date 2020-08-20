@@ -7,6 +7,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import static io.restassured.RestAssured.given;
+import static io.restassured.RestAssured.when;
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.is;
 
@@ -25,7 +26,17 @@ public class SpartanTest2 {
     @Test
     public void testSingleSpartan(){
 
+        // I want to log the request I sent so I see what is the uRL , methods and so on
+        given()
+                .log().all().
+        when()
+                .get("/spartan/971").
+//                .prettyPeek().
+        then()
+                .log().all()
+                .statusCode( is(200))
 
+                ;
 
 
     }
