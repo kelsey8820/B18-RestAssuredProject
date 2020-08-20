@@ -29,11 +29,14 @@ public class SpartanTest2 {
         // I want to log the request I sent so I see what is the uRL , methods and so on
         given()
                 .log().all().
+//                .log().uri().
         when()
-                .get("/spartan/971").
+                .get("/spartans/971").
 //                .prettyPeek().
         then()
                 .log().all()
+//                .log().body()
+//                .log().ifValidationFails()
                 .statusCode( is(200))
 
                 ;
