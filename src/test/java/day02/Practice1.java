@@ -14,7 +14,8 @@ public class Practice1 {
         //https://www.breakingbadapi.com/api/characters
 
         when()
-                .get("https://www.breakingbadapi.com/api/characters").
+                .get("https://www.breakingbadapi.com/api/characters")
+                .prettyPeek().
         then()
                 .statusCode( is(200) )   // checking status code
                 .header("Content-Type", is("application/json; charset=utf-8") )
