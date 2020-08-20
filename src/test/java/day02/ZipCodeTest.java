@@ -39,7 +39,8 @@ public class ZipCodeTest {
                 // get the state and check it's Virginia
                 .body("places[0].state" , is("Virginia") )
                 // FX FOR THE SPACE IN THE KEY
-                .body("'post code'", is(22030) )
+                .body("'post code'", is("22030") )
+
                 ;
 
 
