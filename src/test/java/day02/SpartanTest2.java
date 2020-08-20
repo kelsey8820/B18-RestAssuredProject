@@ -31,13 +31,13 @@ public class SpartanTest2 {
     public void testHello(){
 
         given()
-                .accept(ContentType.TEXT).
+                .accept(ContentType.TEXT). // specify you want to get a text result back
         when()
-                .get("/hello").
+                .get("/hello").  // sending request to baseURI+basePath+ /hello
         then()
-                .statusCode( is(200) )
-                .contentType( ContentType.TEXT)
-                .body(equalTo("Hello from Sparta")) ;
+                .statusCode( is(200) )  // checking status code 200
+                .contentType( ContentType.TEXT)  // checking content type is text
+                .body(equalTo("Hello from Sparta")) ; // checking the body
 
     }
 
