@@ -13,6 +13,13 @@ public class Practice1 {
     public void testBreakingBad(){
         //https://www.breakingbadapi.com/api/characters
 
+        when()
+                .get("https://www.breakingbadapi.com/api/characters").
+        then()
+                .statusCode( is(200) )   // checking status code
+                .header("Content-Type", is("application/json; charset=utf-8") )
+                ;
+
     }
 
 
