@@ -70,7 +70,9 @@ public class ZipCodeTest {
                 .body("'country abbreviation'",is("US") )
                 // test the latitude of first place is "38.8458"
                 .body("places[0].latitude" ,is("38.8458") )
-
+                // jsonPath hack for getting last item from jsonArray
+                // -1 index indicate the last item , only works here not in postman
+                .body("places[-1].latitude" , is("38.7602") )
 
         ;
 
