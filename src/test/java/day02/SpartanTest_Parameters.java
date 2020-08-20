@@ -25,8 +25,28 @@ public class SpartanTest_Parameters {
     @Test
     public void testSingleSpartan(){
 
+        given()
+                .log().all()
+                .pathParam("id",971).
+        when()
+                .get("spartans/{id}").
+        then()
+                .statusCode( is(200) );
 
+    }
 
+    @DisplayName("Testing2 /spartans/{id}")
+    @Test
+    public void testSingleSpartan2(){
+
+        given()
+                .log().all().
+        when()
+                .get("spartans/{id}" , 971 ).
+        then()
+                .statusCode( is(200))
+
+                ;
     }
 
 
