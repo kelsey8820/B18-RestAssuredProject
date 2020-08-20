@@ -29,12 +29,13 @@ public class SpartanSearchTest_QueryParam {
                 .log().all()
                 .queryParam("gender","male")
                 .queryParam("nameContains","a").
-
         when()
                 .get("spartans/search").
         then()
                 .log().all()
                 .statusCode(200)
+                // assert number of elements according to your result here
+                .body("numberOfElements", is(67) )
         ;
 
 
