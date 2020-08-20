@@ -48,6 +48,18 @@ public class SpartanTest_Parameters {
 
                 ;
     }
+    @DisplayName("Testing /spartans/{id} Body")
+    @Test
+    public void testSingleSpartanBody(){
+
+
+    }
+
+
+
+
+
+
 
 
 }
