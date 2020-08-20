@@ -52,6 +52,23 @@ public class SpartanTest_Parameters {
     @Test
     public void testSingleSpartanBody(){
 
+        given()
+                .log().all()
+                .pathParam("id",971).
+        when()
+                .get("spartans/{id}").
+        then()
+                .log().all()
+                .statusCode(is(200))
+//                .body("JSON PATH",is( "THE VALUE" )  )
+                .body("id",     is(971 ) )
+                .body("name",   is("Test") )
+                .body("gender", is("Male") )
+                .body("phone",  is(3216549870L) )
+
+        ;
+
+
 
     }
 
