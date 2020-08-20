@@ -62,10 +62,17 @@ public class ZipCodeTest {
                 .pathParam("city","Fairfax")
                 .log().all().
         when()
-                .get("{state}/{city}").
+                .get("/{state}/{city}").
+//                .get("/{state}/{city}" , "VA","Fairfax" ). // second way we did with spartan
         then()
                 .log().all()
-                .statusCode( is(200) ) ;
+                .statusCode( is(200) )
+                .body("'country abbreviation'",is("US") )
+                // test the latitude of first place is "38.8458"
+                .body("places[0].latitude" ,is("38.8458") )
+
+
+        ;
 
 
     }
