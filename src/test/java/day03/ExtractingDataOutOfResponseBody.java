@@ -20,11 +20,13 @@ public class ExtractingDataOutOfResponseBody {
             // t   = Boss Baby
             // Save the response into response object
 
-        Response response = given()
+     Response response =
+            given()
+                .log().all()
                 .baseUri("http://www.omdbapi.com")
                 .queryParam("apikey","26aa5b74")
                 .queryParam("t","Boss Baby").
-        when()
+            when()
                 .get();
 
 
