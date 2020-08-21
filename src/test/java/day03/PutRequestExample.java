@@ -45,7 +45,7 @@ public class PutRequestExample {
                 .statusCode(204) ;
 
     }
-
+    @DisplayName("Delete Data using Delete method")
     @Test
     public void testDelete(){
 
@@ -53,8 +53,7 @@ public class PutRequestExample {
                 .delete("/spartans/{id}",756).
         then()
                 .statusCode(204)
-
-                ;
+        ;
 
     }
 
