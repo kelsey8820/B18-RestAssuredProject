@@ -28,9 +28,9 @@ public class SpartanTest_Parameters {
         given()
                 .log().all()
                 .pathParam("id",971).
-                when()
+        when()
                 .get("spartans/{id}").
-                then()
+        then()
                 .statusCode( is(200) );
 
     }
@@ -41,9 +41,9 @@ public class SpartanTest_Parameters {
 
         given()
                 .log().all().
-                when()
+        when()
                 .get("spartans/{id}" , 971 ).
-                then()
+        then()
                 .statusCode( is(200))
 
         ;
@@ -55,9 +55,9 @@ public class SpartanTest_Parameters {
         given()
                 .log().all()
                 .pathParam("id",971).
-                when()
+         when()
                 .get("spartans/{id}").
-                then()
+         then()
                 .log().all()
                 .statusCode(is(200))
 //                .body("JSON PATH",is( "THE VALUE" )  )
