@@ -23,6 +23,30 @@ public class PutRequestExample {
 
     }
 
+    @DisplayName("Updating existing Data")
+    @Test
+    public void updateSpartan(){
+
+        String updatedBody = "{\n" +
+                "        \"id\": 809,\n" +
+                "        \"name\": \"Wonder Woman\",\n" +
+                "        \"gender\": \"Female\",\n" +
+                "        \"phone\": 1234567890\n" +
+                "       }" ;
+
+        given()
+                .contentType(ContentType.JSON)
+                .body(updatedBody)
+                .log().all().
+        when()
+                .put("/spartans/{id}",809).
+        then()
+                .log().all()
+                .statusCode(204) ;
+
+
+
+    }
 
 
 }
