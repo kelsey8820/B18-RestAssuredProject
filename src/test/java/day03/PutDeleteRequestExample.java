@@ -12,7 +12,7 @@ import static io.restassured.RestAssured.*;
 import static org.hamcrest.Matchers.*;
 
 
-public class PutRequestExample {
+public class PutDeleteRequestExample {
 
     @BeforeAll
     public static void init(){
