@@ -45,8 +45,27 @@ public class PostRequestExample {
                 .log().all()
                 .statusCode( is(201) )
                 .contentType(ContentType.JSON)
+                .body("success", is("A Spartan is Born!") )
+                .body("data.name",is("Adam") )
             ;
     }
+
+    // Please create another test
+    // make a post request , store the response Object
+    // save the id into int variable
+    // save the name into String
+    // as a homework, save the spartan data field into the map
+                // so your map will contain id, name, gender, phone
+    // print them out.
+
+    @DisplayName("Practice extracting data")
+    @Test
+    public void postRequestExtractingData(){
+
+
+
+    }
+
 
 
 
