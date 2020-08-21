@@ -39,6 +39,8 @@ public class SpartanSearchExtractData {
 
         // if you wanted to get single Spartan , for example the first one id
         // you would use jsonPath of  content[0].id
+        int firstID = jp.getInt("content[0].id");
+        System.out.println("firstID = " + firstID);
         // if you want to get al the ids , You can use getList method and remove the index
             //  content.id  for the id , content.name
 
