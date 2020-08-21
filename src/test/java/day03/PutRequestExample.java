@@ -44,9 +44,18 @@ public class PutRequestExample {
                 .log().all()
                 .statusCode(204) ;
 
-
-
     }
 
+    @Test
+    public void testDelete(){
+
+        when()
+                .delete("/spartans/{id}",756).
+        then()
+                .statusCode(204)
+
+                ;
+
+    }
 
 }
