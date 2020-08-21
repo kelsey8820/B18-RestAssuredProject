@@ -42,6 +42,7 @@ public class PostRequestExample {
         when()
                 .post("/spartans").
         then()
+                .log().all()
                 .statusCode( is(201) )
                 .contentType(ContentType.JSON)
             ;
