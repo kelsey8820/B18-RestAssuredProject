@@ -1,5 +1,6 @@
 package pojo;
-
+// a class for Plain Old Java Object (POJO)
+// to represent data
 public class Spartan {
 
     private String name;
