@@ -33,12 +33,21 @@ public class PostRequestTest {
         String randomName = faker.name().firstName();
         System.out.println("randomName = " + randomName);
 
-
         String bodyString = "{\n" +
-                "  \"name\"  : \"  " + randomName+ "     \",\n" +
+                "  \"name\"  : \"" + randomName+ "\",\n" +
                 "  \"gender\": \"Female\",\n" +
                 "  \"phone\": 6234567890\n" +
                 "}";
+
+        given()
+                .log().all()
+                .contentType(ContentType.JSON)
+                .body(bodyString).
+        when()
+                .post("/spartans").
+        then()
+                .log().all()
+                .statusCode(201) ;
 
 
     }
