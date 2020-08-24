@@ -8,6 +8,8 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import java.io.File;
+
 import static io.restassured.RestAssured.*;
 import static org.hamcrest.Matchers.*;
 
@@ -32,7 +34,7 @@ public class PostRequestTest {
         Faker faker = new Faker();
         String randomName = faker.name().firstName();
         System.out.println("randomName = " + randomName);
-
+        // try to randomize gender and phone num on your own at home.
         String bodyString = "{\n" +
                 "  \"name\"  : \"" + randomName+ "\",\n" +
                 "  \"gender\": \"Female\",\n" +
@@ -47,10 +49,39 @@ public class PostRequestTest {
                 .post("/spartans").
         then()
                 .log().all()
-                .statusCode(201) ;
+                .statusCode(201)
+                .body("data.name", is( randomName ) ) ;
+        ;
 
 
     }
+
+    @DisplayName("Posting with external json file")
+    @Test
+    public void testPostWithExternalFile(){
+
+        // create a file object that point to spartan.json you just added
+        // so we can use this as body in post request
+        File file1 = new File("spartan.json");
+
+        given()
+                .log().all()
+                .contentType(ContentType.JSON)
+                .body(file1).
+        when()
+                .post("/spartans").
+        then()
+                .log().all()
+                .statusCode(201)
+                .body("data.name",is("From File") ) ;
+
+
+
+
+    }
+
+
+
 
 
 }
