@@ -1,4 +1,5 @@
 package day04;
+import com.github.javafaker.Faker;
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
 import io.restassured.path.json.JsonPath;
@@ -23,6 +24,24 @@ public class PostRequestTest {
 
     }
 
+    @DisplayName("Post request with String as body")
+    @Test
+    public void testPostWithStringBody(){
+
+        // lets try to get random names rather than same ADAM each time
+        Faker faker = new Faker();
+        String randomName = faker.name().firstName();
+        System.out.println("randomName = " + randomName);
+
+
+        String bodyString = "{\n" +
+                "  \"name\"  : \"  " + randomName+ "     \",\n" +
+                "  \"gender\": \"Female\",\n" +
+                "  \"phone\": 6234567890\n" +
+                "}";
+
+
+    }
 
 
 }
