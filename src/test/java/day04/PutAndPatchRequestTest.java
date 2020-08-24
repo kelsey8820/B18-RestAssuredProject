@@ -51,6 +51,14 @@ public class PutAndPatchRequestTest {
                 .log().all()
                 .statusCode( is(204) )
                 ;
+        //  MAKING ANOTHER GET REQUEST TO MAKE SURE IT WORKED !!!!!
+
+        when()
+                .get("/spartans/{id}",142).
+        then()
+                .statusCode(200)
+                .body("name" , is(randomName ) )
+                ;
 
 
 
@@ -83,8 +91,6 @@ public class PutAndPatchRequestTest {
                 .log().all()
                 .statusCode( is(204) )
         ;
-
-
 
     }
 
