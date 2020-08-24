@@ -113,10 +113,12 @@ public class PutAndPatchRequestTest {
         then()
                 .log().all()
                 .statusCode(204) ;
-
+        // MAKE ANOTHER GET REQUEST HERE TO MAKE SURE IT WORKED
 
     }
 
+    // CREATE A METHOD THAT POST A RANDOM SPARTAN TO THE SERVER
+    // AND RETURN THE ID OF THAT SPARTAN , SO YOU CAN ALWAYS USE A DATA THAT EXISTS
 
 
 
