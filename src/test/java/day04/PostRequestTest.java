@@ -93,16 +93,18 @@ public class PostRequestTest {
         bodyMap.put("phone",3476346789l);
 
         System.out.println("bodyMap = " + bodyMap);
-        // j
+
         given()
                 .log().all()
                 .contentType(ContentType.JSON)
-                .body(bodyMap).
+                .body(bodyMap). // jackson-data-bind turn your java map object to json here
         when()
                 .post("/spartans").
         then()
                 .log().all()
-                .statusCode(201) ;
+                .statusCode(201)
+                .body("data.name", is("Vincent")  )
+        ;
 
 
     }
