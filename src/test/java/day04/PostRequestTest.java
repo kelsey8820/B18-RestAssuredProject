@@ -75,7 +75,16 @@ public class PostRequestTest {
                 .statusCode(201)
                 .body("data.name",is("From File") ) ;
 
+    }
 
+    @DisplayName("Posting with Map object as body")
+    @Test
+    public void testPostWithMapAsBody(){
+
+        // please add dependency jackson-databind
+
+        // create a Map<String,Object> as hashMap
+        // add name , gender , phone
 
 
     }
