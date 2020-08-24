@@ -93,6 +93,10 @@ public class PutAndPatchRequestTest {
         ;
 
     }
+    // difference between put and patch
+    // in this app
+    // put will completely renew entire json that that location with new data
+    // patch will partially update the date
 
     @DisplayName("Patch request ")
     @Test
