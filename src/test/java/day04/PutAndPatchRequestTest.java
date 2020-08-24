@@ -94,6 +94,29 @@ public class PutAndPatchRequestTest {
 
     }
 
+    @DisplayName("Patch request ")
+    @Test
+    public void testPathPartialUpdate(){
+
+        // ONLY UPDATE THE NAME WITH FAKER
+        String randomName = new Faker().name().firstName();
+//        String patchBody = "\"name\" : \" "+ randomName + "\" " ;
+        Map<String, Object> patchBodyMap = new HashMap<>();
+        patchBodyMap.put("name" , randomName) ;
+
+        given()
+                .log().all()
+                .contentType(ContentType.JSON)
+                .body(patchBodyMap).
+        when()
+                .patch("/spartans/{id}" , 142).
+        then()
+                .log().all()
+                .statusCode(204) ;
+
+
+    }
+
 
 
 
