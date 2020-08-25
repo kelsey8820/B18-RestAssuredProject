@@ -93,7 +93,7 @@ public class PostRequestWithFormAsBody {
                                 .post("/login") ;
 
         //token = response.path("token") ;  // this is using path method
-        token = response.jsonPath().getString("token") ;
+        token = response.jsonPath().getString("token") ; // this is using jsonPath
         return token ;
     }
 
