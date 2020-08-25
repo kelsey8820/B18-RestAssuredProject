@@ -1,9 +1,14 @@
 package day05;
 
+import com.github.javafaker.Faker;
 import io.restassured.RestAssured;
+import io.restassured.http.ContentType;
+import io.restassured.response.Response;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import pojo.Spartan;
+
 
 import static io.restassured.RestAssured.*;
 
@@ -49,9 +54,33 @@ public class SecureSpartanTest {
     @Test
     public void testGettingSpartanWithCredentials(){
 
+            given()
+                    .log().all()
+                    .auth().basic("admin","admin")
+                    .pathParam("id",188).
+            when()
+                    .get("/spartans/{id}").
+            then()
+                    .log().all()
+                    .statusCode(200) ;
 
+    }
 
+    public static int createRandomSpartan(){
 
+        Faker faker = new Faker();
+        String name = faker.name().firstName();
+        String gender = faker.demographic().sex();
+        long phone = faker.number().numberBetween(100000000L,9999999999L);
+
+        Spartan sp = new Spartan(name, gender, phone) ;
+
+        Response response = given()
+                                .contentType(ContentType.JSON)
+                                .body(sp).
+                            when()
+                                .post("/spartans");
+        return response.path("data.id") ;
     }
 
 
