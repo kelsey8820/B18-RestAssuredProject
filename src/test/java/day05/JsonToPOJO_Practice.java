@@ -117,8 +117,13 @@ public class JsonToPOJO_Practice {
         System.out.println(names);
 
         // Store the entire jsonArray as list of spartan2
+        List<Spartan2> spartan2List = jp.getList("content" , Spartan2.class) ;
 
-
+        System.out.println("spartan2List = " + spartan2List);
+//        for( Spartan2 each : spartan2List ){
+//            System.out.println(each);
+//        }
+          spartan2List.forEach( each-> System.out.println(each) );
 
     }
 
