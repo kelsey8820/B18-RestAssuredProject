@@ -68,11 +68,13 @@ public class JsonToPOJO_Practice {
 
          Response response =   given()
                                         .log().all()
-                                        .queryParam("Male").
+                                        .auth().basic("admin","admin")
+                                        .queryParam("gender","Male").
                                 when()
                                         .get("/spartans/search")
                                         .prettyPeek();
 
+        System.out.println("response.statusCode() = " + response.statusCode());
 
 
     }
