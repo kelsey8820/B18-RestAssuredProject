@@ -4,6 +4,7 @@ import io.restassured.RestAssured;
 import io.restassured.authentication.AuthenticationScheme;
 import io.restassured.authentication.BasicAuthScheme;
 import io.restassured.builder.RequestSpecBuilder;
+import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
@@ -71,10 +72,27 @@ public class JsonToPOJO_Practice {
                                         .auth().basic("admin","admin")
                                         .queryParam("gender","Male").
                                 when()
-                                        .get("/spartans/search")
-                                        .prettyPeek();
+                                        .get("/spartans/search") ;
+                                        //.prettyPeek();
 
         System.out.println("response.statusCode() = " + response.statusCode());
+        // print out the first id and name from the response
+        JsonPath jp = response.jsonPath() ;
+        System.out.println("First guy ID " +   jp.getInt("content[0].id")   );
+        System.out.println("First guy Name " + jp.getString("content[0].name")  )  ;
+
+        // lets save the entire first json object in the array into Spartan2 POJO
+        // getObject method accept 2 parameters ,
+        //  first parameter to provide the path to your json
+        //  second parameter to provide the type you want to store as  : Spartan2.class
+        // eventually it will work just like  new Spartan(317,'Robert',Male,3252645223)
+
+        Spartan2 firstMaleSpartan = jp.getObject("content[0]", Spartan2.class) ;
+        //System.out.println("firstMaleSpartan = " + firstMaleSpartan);
+        System.out.println("The Spartan id from POJO is "       + firstMaleSpartan.getId() );
+        System.out.println("The Spartan name from POJO is "     + firstMaleSpartan.getName() );
+        System.out.println("The Spartan gender from POJO is "   + firstMaleSpartan.getGender() );
+        System.out.println("The Spartan phone from POJO is "    + firstMaleSpartan.getPhone() );
 
 
     }
