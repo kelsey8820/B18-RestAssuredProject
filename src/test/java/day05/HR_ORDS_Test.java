@@ -9,6 +9,8 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import pojo.Region;
 
+import java.util.List;
+
 import static io.restassured.RestAssured.get;
 import static io.restassured.RestAssured.given;
 
@@ -65,7 +67,13 @@ public class HR_ORDS_Test {
         System.out.println( "Get last region_id   "+ jp.getInt("items[-1].region_id")  );
 
         // get the list of region name from the response and save it to List<String>
+        List<String> allNames = jp.getList("items.region_name");
+        System.out.println("allNames = " + allNames);
+
           // get a List<Region> from the response json
+        List<Region> regionList = jp.getList("items", Region.class) ;
+
+        System.out.println("regionList = " + regionList);
 
 
     }
