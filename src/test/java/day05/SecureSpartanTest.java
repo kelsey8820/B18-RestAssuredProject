@@ -54,10 +54,12 @@ public class SecureSpartanTest {
     @Test
     public void testGettingSpartanWithCredentials(){
 
+            int newId = createRandomSpartan();
+
             given()
                     .log().all()
                     .auth().basic("admin","admin")
-                    .pathParam("id",188).
+                    .pathParam("id",newId).
             when()
                     .get("/spartans/{id}").
             then()
@@ -71,16 +73,20 @@ public class SecureSpartanTest {
         Faker faker = new Faker();
         String name = faker.name().firstName();
         String gender = faker.demographic().sex();
-        long phone = faker.number().numberBetween(100000000L,9999999999L);
-
+        long phone = faker.number().numberBetween(1000000000L,9999999999L);
+        // this what we are going pass for post body
         Spartan sp = new Spartan(name, gender, phone) ;
 
         Response response = given()
+                                .log().all()
+                                .auth().basic("admin","admin")
                                 .contentType(ContentType.JSON)
                                 .body(sp).
                             when()
-                                .post("/spartans");
-        return response.path("data.id") ;
+                                .post("/spartans")
+                                .prettyPeek();
+
+        return response.jsonPath().getInt("data.id") ;
     }
 
 
