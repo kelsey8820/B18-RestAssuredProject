@@ -1,9 +1,14 @@
 package day05;
 
 import io.restassured.RestAssured;
+import io.restassured.http.ContentType;
+import io.restassured.response.Response;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import pojo.Region;
+
+import static io.restassured.RestAssured.given;
 
 public class HR_ORDS_Test {
 
@@ -16,10 +21,19 @@ public class HR_ORDS_Test {
 
     }
 
-    @DisplayName("Testing the /regions/{id} endpoint")
+    @DisplayName("Testing the /regions/{region_id} endpoint")
     @Test
     public void testRegion(){
 
+         Response response = given()
+                                     .accept(ContentType.JSON)
+                                     .pathParam("region_id", 1).
+                             when()
+                                     .get("/regions/{region_id}")
+                                     .prettyPeek();
+
+         Region r1 = response.as( Region.class ) ;
+        System.out.println("r1 = " + r1);
 
     }
 
