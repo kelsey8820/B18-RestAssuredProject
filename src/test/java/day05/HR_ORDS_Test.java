@@ -26,6 +26,7 @@ public class HR_ORDS_Test {
     public void testRegion(){
 
          Response response = given()
+                                    .log().all()
                                      .accept(ContentType.JSON)
                                      .pathParam("region_id", 1).
                              when()
