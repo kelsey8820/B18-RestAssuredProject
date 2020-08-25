@@ -1,6 +1,9 @@
 package day05;
 
 import io.restassured.RestAssured;
+import io.restassured.http.ContentType;
+import io.restassured.response.Response;
+import io.restassured.specification.RequestSpecification;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -42,6 +45,8 @@ public class PostRequestWithFormAsBody {
 
         given()
                 .log().all()
+                // explicitly saying the body content type is x-www-urlencoded-form-data
+                .contentType(ContentType.URLENC)
                 .formParam("email","librarian69@library")
                 .formParam("password", "KNPXrm3S" ).
         when()
@@ -67,8 +72,18 @@ public class PostRequestWithFormAsBody {
     public static String loginAndGetToken(String username, String password){
 
         String token = "";
-        // YOU FILL IT UP HERE
 
+        Response response = given()
+//                                .log().all()
+                                // explicitly saying the body content type is x-www-urlencoded-form-data
+                                .contentType(ContentType.URLENC)
+                                .formParam("email","librarian69@library")
+                                .formParam("password", "KNPXrm3S" ).
+                                        when()
+                                .post("/login") ;
+
+        //token = response.path("token") ;  // this is using path method
+        token = response.jsonPath().getString("token") ;
         return token ;
     }
 
