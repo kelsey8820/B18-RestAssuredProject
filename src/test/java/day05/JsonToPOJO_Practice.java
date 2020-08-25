@@ -134,5 +134,4 @@ public class JsonToPOJO_Practice {
     }
 
 
-
 }
