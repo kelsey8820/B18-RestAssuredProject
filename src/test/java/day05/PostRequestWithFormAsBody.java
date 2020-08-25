@@ -66,9 +66,10 @@ public class PostRequestWithFormAsBody {
      */
     public static String loginAndGetToken(String username, String password){
 
+        String token = "";
         // YOU FILL IT UP HERE
 
-        return "TOKEN!!" ;
+        return token ;
     }
 
 
