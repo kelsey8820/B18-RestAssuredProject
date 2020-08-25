@@ -45,7 +45,14 @@ public class SecureSpartanTest {
 
     }
 
+    @DisplayName("Test GET /spartan/{id} Endpoint with Credentials")
+    @Test
+    public void testGettingSpartanWithCredentials(){
 
+
+
+
+    }
 
 
 }
