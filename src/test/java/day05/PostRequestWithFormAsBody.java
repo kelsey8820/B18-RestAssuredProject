@@ -62,6 +62,16 @@ public class PostRequestWithFormAsBody {
 
     }
 
+    @DisplayName("Testing out the utility")
+    @Test
+    public void runningUtilityMethod(){
+
+        System.out.println(  loginAndGetToken("librarian69@library", "KNPXrm3S")  );
+
+    }
+
+
+
     /**
      * A static utility method to get the token by providing username and password
      * as Post request to /Login endpoint and capture the token field from response json
@@ -77,8 +87,8 @@ public class PostRequestWithFormAsBody {
 //                                .log().all()
                                 // explicitly saying the body content type is x-www-urlencoded-form-data
                                 .contentType(ContentType.URLENC)
-                                .formParam("email","librarian69@library")
-                                .formParam("password", "KNPXrm3S" ).
+                                .formParam("email",username)
+                                .formParam("password", password ).
                                         when()
                                 .post("/login") ;
 
