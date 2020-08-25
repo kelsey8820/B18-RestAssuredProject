@@ -51,11 +51,24 @@ public class PostRequestWithFormAsBody {
                 .statusCode(200)
                 // we can not actually validate the token since it's dynamic
                 // what we can validate though -- token field exists and it's not null
-                .body("token", is( notNullValue() ) )
+                .body("token", is(  notNullValue() ) )
 
                 ;
 
+    }
 
+    /**
+     * A static utility method to get the token by providing username and password
+     * as Post request to /Login endpoint and capture the token field from response json
+     * @param username
+     * @param password
+     * @return the token as String from the response json
+     */
+    public static String loginAndGetToken(String username, String password){
+
+        // YOU FILL IT UP HERE
+
+        return "TOKEN!!" ;
     }
 
 
