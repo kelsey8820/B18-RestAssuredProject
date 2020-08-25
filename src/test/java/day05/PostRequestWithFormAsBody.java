@@ -2,6 +2,11 @@ package day05;
 
 import io.restassured.RestAssured;
 import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
+
+import static io.restassured.RestAssured.*;
+import static org.hamcrest.Matchers.*;
 
 public class PostRequestWithFormAsBody {
 
@@ -31,12 +36,27 @@ public class PostRequestWithFormAsBody {
 
     }
 
+    @DisplayName("POST /login request test")
+    @Test
+    public void testLoginEndPoint(){
+
+        given()
+                .log().all()
+                .formParam("email","librarian69@library")
+                .formParam("password", "KNPXrm3S" ).
+        when()
+                .post("/login").
+        then()
+                .log().all()
+                .statusCode(200)
+                // we can not actually validate the token since it's dynamic
+                // what we can validate though -- token field exists and it's not null
+                .body("token", is( notNullValue() ) )
+
+                ;
 
 
-
-
-
-
+    }
 
 
 
