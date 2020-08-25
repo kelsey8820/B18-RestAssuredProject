@@ -13,6 +13,7 @@ import pojo.Spartan;
 import pojo.Spartan2;
 
 import java.util.Base64;
+import java.util.List;
 
 import static io.restassured.RestAssured.*;
 import static io.restassured.specification.ProxySpecification.auth;
@@ -89,7 +90,7 @@ public class JsonToPOJO_Practice {
 
         Spartan2 firstMaleSpartan = jp.getObject("content[0]", Spartan2.class) ;
         //System.out.println("firstMaleSpartan = " + firstMaleSpartan);
-        System.out.println("The Spartan id from POJO is "       + firstMaleSpartan.getId() );
+        //System.out.println("The Spartan id from POJO is "       + firstMaleSpartan.getId() );
         System.out.println("The Spartan name from POJO is "     + firstMaleSpartan.getName() );
         System.out.println("The Spartan gender from POJO is "   + firstMaleSpartan.getGender() );
         System.out.println("The Spartan phone from POJO is "    + firstMaleSpartan.getPhone() );
@@ -97,8 +98,29 @@ public class JsonToPOJO_Practice {
 
     }
 
+    // I already know how to store one Spartan json into Spartan2 POJO
+    // How can I store the entire jsonArray into the List<Spartan2>
+    @DisplayName("Save the json array as List<Spartan>")
+    @Test
+    public void testJsonArrayToListOfPojo(){
+
+        Response response =  given()
+                                    .auth().basic("admin","admin")
+                                    .queryParam("gender","Female").
+                             when()
+                                    .get("/spartans/search");
+        // store all ids as list of Integer
+        JsonPath jp = response.jsonPath() ;
+        List<Integer> ids = jp.getList("content.id") ;
+        System.out.println(ids);
+        List<String> names = jp.getList("content.name") ;
+        System.out.println(names);
+
+        // Store the entire jsonArray as list of spartan2
 
 
+
+    }
 
 
 
