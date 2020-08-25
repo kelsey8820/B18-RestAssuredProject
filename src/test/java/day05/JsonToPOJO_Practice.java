@@ -1,6 +1,9 @@
 package day05;
 
 import io.restassured.RestAssured;
+import io.restassured.authentication.AuthenticationScheme;
+import io.restassured.authentication.BasicAuthScheme;
+import io.restassured.builder.RequestSpecBuilder;
 import io.restassured.response.Response;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
@@ -8,7 +11,10 @@ import org.junit.jupiter.api.Test;
 import pojo.Spartan;
 import pojo.Spartan2;
 
+import java.util.Base64;
+
 import static io.restassured.RestAssured.*;
+import static io.restassured.specification.ProxySpecification.auth;
 
 public class JsonToPOJO_Practice {
 
@@ -24,10 +30,10 @@ public class JsonToPOJO_Practice {
     @Test
     public void testSpartanJsonToSpartanObject(){
 
-        int newID = SecureSpartanTest.createRandomSpartan();
+        int newID = 368; //SecureSpartanTest.createRandomSpartan();
 
         Response response = given()
-                                .auth().basic("admin","admin")
+                                //.auth().basic("admin","admin")
                                 .log().all()
                                 .pathParam("id", newID).
                         when()
@@ -60,6 +66,12 @@ public class JsonToPOJO_Practice {
     @Test
     public void gettingNestedJsonAsPojo(){
 
+         Response response =   given()
+                                        .log().all()
+                                        .queryParam("Male").
+                                when()
+                                        .get("/spartans/search")
+                                        .prettyPeek();
 
 
 
