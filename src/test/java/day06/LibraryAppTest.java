@@ -8,6 +8,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import static io.restassured.RestAssured.given;
+import static org.hamcrest.Matchers.is;
 
 public class LibraryAppTest {
 
@@ -32,9 +33,36 @@ public class LibraryAppTest {
                 .get("/dashboard_stats").
         then()
                 .log().all()
-                .statusCode(200);
+                .statusCode(200)
+                .body("book_count",is("985") )
+                .body("borrowed_books",is("600"))
+                .body("users",is("5042") )
+                ;
+        ;
 
     }
+
+    //add a test for the POST /decode endpoint
+    // this endpoint does not need authorization
+    // it accept form param as name token value your long token
+    // and return json response as user information and authority
+    // assert the email of user is same as the email you used the token
+    @DisplayName("Testing POST /decode endpoint")
+    @Test
+    public void testDecodeJWT_Token(){
+
+        given()
+                .log().all()
+                .contentType(ContentType.URLENC)
+                .formParam("token",libraryToken).
+        when()
+                .post("/decode").
+        then()
+                .statusCode(is(200)) ;
+
+
+    }
+
 
 
 
