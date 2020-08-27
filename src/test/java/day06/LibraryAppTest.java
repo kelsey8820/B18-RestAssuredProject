@@ -9,6 +9,7 @@ import org.junit.jupiter.api.Test;
 
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.is;
+import static org.hamcrest.Matchers.nullValue;
 
 public class LibraryAppTest {
 
@@ -92,6 +93,12 @@ public class LibraryAppTest {
                 .log().all()
                 .statusCode(is(200))
                 // verify  "id": "2080","full_name": "Test Student 142","user_group_id": "3",
+                .body("id" ,is("2080") )
+                .body("full_name" ,is("Test Student 142") )
+                .body("user_group_id", is("3") )
+                // check image is null and extra data is null
+                .body("image",is( nullValue() )) // how to use matcher for null value
+                .body("body", nullValue() )
         ;
 
     }
