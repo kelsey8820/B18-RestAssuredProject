@@ -11,6 +11,8 @@ import pojo.Locations;
 import java.util.List;
 
 import static io.restassured.RestAssured.*;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.hasSize;
 
 public class HR_ORDS_POJO_Test {
 
@@ -55,7 +57,12 @@ public class HR_ORDS_POJO_Test {
 //        for(Locations eachLocation  :  locationsList){
 //            System.out.println("eachLocation = " + eachLocation);
 //        }
-        locationsList.forEach(eachLocation-> System.out.println("eachLocation = " + eachLocation) );
+//        locationsList.forEach(eachLocation-> System.out.println("eachLocation = " + eachLocation) );
+
+        // how do we assert we have 29 items in the list
+        // using hamcrest library assertion to check the list with certain size
+        assertThat(locationsList, hasSize(23) );
+
     }
 
 
