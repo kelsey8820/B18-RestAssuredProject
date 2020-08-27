@@ -18,6 +18,7 @@ public class LibraryAppTest {
 
         RestAssured.baseURI = "http://library1.cybertekschool.com";
         RestAssured.basePath = "/rest/v1";
+        libraryToken = loginAndGetToken("librarian69@library", "KNPXrm3S");
 
     }
     @DisplayName("Send request to /dashboard_stats")
@@ -26,7 +27,7 @@ public class LibraryAppTest {
 
         given()
                 .log().all()
-                .header("x-library-token","eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyIjp7ImlkIjoiMjA5MCIsImZ1bGxfbmFtZSI6IlRlc3QgTGlicmFyaWFuIDY5IiwiZW1haWwiOiJsaWJyYXJpYW42OUBsaWJyYXJ5IiwidXNlcl9ncm91cF9pZCI6IjIifSwiaWF0IjoxNTk4NTQyOTg0LCJleHAiOjE2MDExMzQ5ODR9.MMxfLRxsTjCcSR9-P1D8acOacBjX_rgFIPEoI_ZvOpM").
+                .header("x-library-token",libraryToken).
         when()
                 .get("/dashboard_stats").
         then()
