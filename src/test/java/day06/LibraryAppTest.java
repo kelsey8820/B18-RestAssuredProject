@@ -50,7 +50,7 @@ public class LibraryAppTest {
     // assert the email of user is same as the email you used the token
 
     // LOGIN AND DECODE REQUEST DOES NOT NEED ANY AUTHENTICATION
-    // LOGIN --->> GENERATE TOKEN
+    // LOGIN  --->> GENERATE TOKEN
     // DECODE --->> TAKE A TOKEN AND DECODE ITS INFO
     // WE DO NOT NEED TO ADD HEADER YOUR LONG TOKEN TO AUTHORIZE THIS REQUEST
 
