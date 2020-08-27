@@ -61,6 +61,11 @@ public class HR_ORDS_GroovyMagic {
         List<String> richPeople = jp.getList("items.findAll { it.salary > 15000 }.first_name ") ;
         System.out.println("richPeople = " + richPeople);
 
+        // Find out all the phone_number in department_id 90
+        List<String> phonesDep90 = jp.getList("items.findAll { it.department_id == 90 }.phone_number ") ;
+        System.out.println("phonesDep90 = " + phonesDep90);
+
+
     }
 
 
