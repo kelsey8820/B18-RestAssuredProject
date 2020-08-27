@@ -1,9 +1,12 @@
 package day06;
 
 import io.restassured.RestAssured;
+import io.restassured.response.Response;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+
+import static io.restassured.RestAssured.get;
 
 public class HR_ORDS_GroovyMagic {
 
@@ -20,7 +23,7 @@ public class HR_ORDS_GroovyMagic {
     @Test
     public void testEmployees(){
 
-
+        Response response = get("/employees").prettyPeek();
 
     }
 
