@@ -60,7 +60,7 @@ public class HR_ORDS_POJO_Test {
 //        }
 //        locationsList.forEach(eachLocation-> System.out.println("eachLocation = " + eachLocation) );
 
-        // how do we assert we have 29 items in the list
+        // how do we assert we have 23 items in the list
         // using hamcrest library assertion to check the list with certain size
         //import static org.hamcrest.MatcherAssert.assertThat;
         //import static org.hamcrest.Matchers.hasSize;
