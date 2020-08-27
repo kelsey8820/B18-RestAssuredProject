@@ -7,6 +7,8 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import java.util.List;
+
 import static io.restassured.RestAssured.get;
 
 public class HR_ORDS_GroovyMagic {
@@ -53,7 +55,11 @@ public class HR_ORDS_GroovyMagic {
         int salary =  jp.getInt("items.find { it.email=='LDEHAAN'}.salary ") ;
         System.out.println("salary = " + salary);
 
+        // findAll  will get all the result that match the criteria and return it as a list
+        // save all the first_names of the employees with salary more than 15000
 
+        List<String> richPeople = jp.getList("items.findAll { it.salary > 15000 }.first_name ") ;
+        System.out.println("richPeople = " + richPeople);
 
     }
 
