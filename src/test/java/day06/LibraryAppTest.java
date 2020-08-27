@@ -98,7 +98,7 @@ public class LibraryAppTest {
                 .body("user_group_id", is("3") )
                 // check image is null and extra data is null
                 .body("image",is( nullValue() )) // how to use matcher for null value
-                .body("body", nullValue() )
+                .body("extra_data", nullValue() )
         ;
 
     }
