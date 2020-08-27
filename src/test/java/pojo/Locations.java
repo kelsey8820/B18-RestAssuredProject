@@ -2,11 +2,15 @@ package pojo;
 
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Locations {
+    // This is instructing jackson to map the json field called location_id
+    // to this particular POJO field locationId
+    @JsonProperty("location_id")
+    private int locationId;
 
-    private int location_id ;
     private String street_address ;
     private String postal_code ;
     private String city ;
@@ -16,7 +20,7 @@ public class Locations {
     @Override
     public String toString() {
         return "Locations{" +
-                "location_id=" + location_id +
+                "location_id=" + locationId +
                 ", street_address='" + street_address + '\'' +
                 ", postal_code='" + postal_code + '\'' +
                 ", city='" + city + '\'' +
@@ -25,12 +29,12 @@ public class Locations {
                 '}';
     }
 
-    public int getLocation_id() {
-        return location_id;
+    public int getLocationId() {
+        return locationId;
     }
 
-    public void setLocation_id(int location_id) {
-        this.location_id = location_id;
+    public void setLocationId(int locationId) {
+        this.locationId = locationId;
     }
 
     public String getStreet_address() {
