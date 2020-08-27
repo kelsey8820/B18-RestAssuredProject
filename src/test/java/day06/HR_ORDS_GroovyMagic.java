@@ -37,8 +37,18 @@ public class HR_ORDS_GroovyMagic {
 
         // get all the ids from first one till fifth
         System.out.println("from the first till the fifth " + jp.getList("items[0..4].employee_id") );
+        // get all last names from index 10-15
+        System.out.println("last name index from 10-15"  + jp.getList("items[10..15].last_name"));
 
-
+        //  get the employee first_name with employee id of 105
+        //  find   and find all  where you can specify the criteria to restrict the result
+        //  find method will return single value that fall into the criteria compared to findAll will return a list
+        //  find { it.employee_id == 105 }
+        // what does the word <it> means -->> eachItem in your json array
+                // just like in your for each loop you have to specify a name ,
+                // the name <it> represent each item in the json array
+         String result = jp.getString("items.find { it.employee_id == 105 }.last_name    ") ;
+        System.out.println("result = " + result);
 
     }
 
