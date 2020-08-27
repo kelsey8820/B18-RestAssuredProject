@@ -5,6 +5,8 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import static io.restassured.RestAssured.given;
+
 public class LibraryAppTest {
 
 
@@ -19,7 +21,14 @@ public class LibraryAppTest {
     @Test
     public void testDashboardStatsWithToken(){
 
-
+        given()
+                .log().all()
+                .header("x-library-token","eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyIjp7ImlkIjoiMjA5MCIsImZ1bGxfbmFtZSI6IlRlc3QgTGlicmFyaWFuIDY5IiwiZW1haWwiOiJsaWJyYXJpYW42OUBsaWJyYXJ5IiwidXNlcl9ncm91cF9pZCI6IjIifSwiaWF0IjoxNTk4NTQyOTg0LCJleHAiOjE2MDExMzQ5ODR9.MMxfLRxsTjCcSR9-P1D8acOacBjX_rgFIPEoI_ZvOpM").
+        when()
+                .get("/dashboard_stats").
+        then()
+                .log().all()
+                .statusCode(200);
 
     }
 
