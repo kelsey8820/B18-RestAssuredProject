@@ -8,6 +8,8 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import pojo.Locations;
 
+import java.util.List;
+
 import static io.restassured.RestAssured.*;
 
 public class HR_ORDS_POJO_Test {
@@ -37,6 +39,23 @@ public class HR_ORDS_POJO_Test {
         System.out.println("l1 = " + l1);
 
 
+    }
+
+    @DisplayName("Testing the /location endpoint")
+    @Test
+    public void testLocations(){
+
+        // save all street address to List<String>
+        // save all Locations into List<Location>
+        Response response = get("/locations").prettyPeek();
+
+        List<Locations> locationsList =
+                response.jsonPath().getList("items",Locations.class) ;
+
+//        for(Locations eachLocation  :  locationsList){
+//            System.out.println("eachLocation = " + eachLocation);
+//        }
+        locationsList.forEach(eachLocation-> System.out.println("eachLocation = " + eachLocation) );
     }
 
 
