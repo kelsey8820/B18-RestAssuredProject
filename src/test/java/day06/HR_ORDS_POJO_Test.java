@@ -6,6 +6,7 @@ import io.restassured.response.Response;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import pojo.Locations;
 
 import static io.restassured.RestAssured.*;
 
@@ -31,6 +32,9 @@ public class HR_ORDS_POJO_Test {
                 when()
                         .get("/locations/{location_id}")
                         .prettyPeek();
+
+        Locations l1 = response.as(Locations.class) ;
+        System.out.println("l1 = " + l1);
 
 
     }
