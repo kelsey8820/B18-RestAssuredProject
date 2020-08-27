@@ -53,12 +53,20 @@ public class LibraryAppTest {
 
         given()
                 .log().all()
-                .contentType(ContentType.URLENC)
+                .accept(ContentType.JSON) // THIS IS TELLING , I WANT JSON BACK AS RESPONSE.
+                .contentType(ContentType.URLENC) // This specify what kinda of data you are sending to the server in the body
                 .formParam("token",libraryToken).
         when()
                 .post("/decode").
         then()
-                .statusCode(is(200)) ;
+                .log().all()
+                .statusCode(is(200))
+                // assert the email is librarian69@library because we used this email to get the token
+                .body("email",is("librarian69@library") )
+                // the token in response is same as the token we used to decode
+                .body("token",  is(libraryToken) )
+                ;
+        ;
 
 
     }
