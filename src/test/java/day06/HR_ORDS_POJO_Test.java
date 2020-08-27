@@ -1,9 +1,13 @@
 package day06;
 
 import io.restassured.RestAssured;
+import io.restassured.http.ContentType;
+import io.restassured.response.Response;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+
+import static io.restassured.RestAssured.*;
 
 public class HR_ORDS_POJO_Test {
 
@@ -20,7 +24,13 @@ public class HR_ORDS_POJO_Test {
     @Test
     public void testLocation(){
 
-
+      Response response = given()
+                        .accept(ContentType.JSON)
+                        .pathParam("location_id",1700)
+                        .log().all().
+                when()
+                        .get("/locations/{location_id}")
+                        .prettyPeek();
 
 
     }
