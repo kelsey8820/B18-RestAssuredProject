@@ -49,6 +49,11 @@ public class HR_ORDS_GroovyMagic {
                 // the name <it> represent each item in the json array
          String result = jp.getString("items.find { it.employee_id == 105 }.last_name    ") ;
         System.out.println("result = " + result);
+        // using above example : find the salary of employee with email value LDEHAAN
+        int salary =  jp.getInt("items.find { it.email=='LDEHAAN'}.salary ") ;
+        System.out.println("salary = " + salary);
+
+
 
     }
 
