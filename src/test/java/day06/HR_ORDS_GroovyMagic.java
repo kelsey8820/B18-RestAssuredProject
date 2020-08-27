@@ -36,6 +36,8 @@ public class HR_ORDS_GroovyMagic {
         System.out.println("last  id " + jp.getInt("items[-1].employee_id"));
 
         // get all the ids from first one till fifth
+        System.out.println("from the first till the fifth " + jp.getList("items[0..4].employee_id") );
+
 
 
     }
