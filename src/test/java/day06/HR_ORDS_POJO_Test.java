@@ -47,10 +47,11 @@ public class HR_ORDS_POJO_Test {
     @Test
     public void testLocations(){
 
-        // save all street address to List<String>
-        // save all Locations into List<Location>
         Response response = get("/locations").prettyPeek();
-
+        // save all street address to List<String>
+        List<String> addressList = response.jsonPath().getList("items.street_address");
+        System.out.println("addressList = " + addressList);
+        // save all Locations into List<Location>
         List<Locations> locationsList =
                 response.jsonPath().getList("items",Locations.class) ;
 
