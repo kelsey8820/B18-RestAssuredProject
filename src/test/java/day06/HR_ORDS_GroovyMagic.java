@@ -66,13 +66,19 @@ public class HR_ORDS_GroovyMagic {
         System.out.println("phonesDep90 = " + phonesDep90);
 
         // max , min
-        // find out the max salary , and min salary
+        // find out the max salary
         int maxSalary =  jp.getInt("items.max{ it.salary }.salary") ;
         System.out.println("maxSalary = " + maxSalary);
         // find out the name of the guy who make max salary
         String richestGuy = jp.getString("items.max {it.salary}.first_name ") ;
         System.out.println("richestGuy = " + richestGuy);
 
+        // find out the min salary
+        int minSalary =  jp.getInt("items.max{ it.salary }.salary") ;
+        System.out.println("minSalary = " + minSalary);
+        // find out the name of the guy who make min salary
+        String lastGuy = jp.getString("items.min {it.salary}.first_name ") ;
+        System.out.println("min salary employee = " + lastGuy);
 
     }
 
