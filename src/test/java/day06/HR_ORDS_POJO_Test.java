@@ -66,6 +66,13 @@ public class HR_ORDS_POJO_Test {
         //import static org.hamcrest.Matchers.hasSize;
         assertThat(locationsList, hasSize(23) );
 
+        // we want to get list of pojo but we only want to get those
+        // data with country_id as US
+        List<Locations> usLocations =
+                response.jsonPath().getList("items.findAll { it.country_id=='US' }", Locations.class) ;
+        //System.out.println("usLocations = " + usLocations);
+        usLocations.forEach( eachLocation -> System.out.println(eachLocation));
+
     }
 
 
