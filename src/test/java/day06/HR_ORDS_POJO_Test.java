@@ -61,6 +61,8 @@ public class HR_ORDS_POJO_Test {
 
         // how do we assert we have 29 items in the list
         // using hamcrest library assertion to check the list with certain size
+        //import static org.hamcrest.MatcherAssert.assertThat;
+        //import static org.hamcrest.Matchers.hasSize;
         assertThat(locationsList, hasSize(23) );
 
     }
