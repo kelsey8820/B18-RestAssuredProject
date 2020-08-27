@@ -71,6 +71,26 @@ public class LibraryAppTest {
 
     }
 
+    @DisplayName("Test /get_user_by_id/{id} Endpoint") //2080
+    @Test
+    public void testSingleUserDate(){
+
+
+        given()
+                .log().all()
+                .header("x-library-token",libraryToken)
+                .pathParam("id",2080).
+        when()
+                .get("/get_user_by_id/{id}").
+        then()
+                .log().all()
+                .statusCode(is(200))
+                // verify  "id": "2080","full_name": "Test Student 142","user_group_id": "3",
+        ;
+
+    }
+
+
 
 
 
