@@ -9,7 +9,7 @@ public class Locations {
     // This is instructing jackson to map the json field called location_id
     // to this particular POJO field locationId
     @JsonProperty("location_id")
-    private int locationId;
+    private int locationID;
 
     private String street_address ;
     private String postal_code ;
@@ -20,7 +20,7 @@ public class Locations {
     @Override
     public String toString() {
         return "Locations{" +
-                "location_id=" + locationId +
+                "location_id=" + locationID +
                 ", street_address='" + street_address + '\'' +
                 ", postal_code='" + postal_code + '\'' +
                 ", city='" + city + '\'' +
@@ -29,12 +29,12 @@ public class Locations {
                 '}';
     }
 
-    public int getLocationId() {
-        return locationId;
+    public int getLocationID() {
+        return locationID;
     }
 
-    public void setLocationId(int locationId) {
-        this.locationId = locationId;
+    public void setLocationID(int locationID) {
+        this.locationID = locationID;
     }
 
     public String getStreet_address() {
