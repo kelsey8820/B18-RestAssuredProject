@@ -11,7 +11,7 @@ public class Locations {
     private String postal_code ;
     private String city ;
     private String state_province ;
-    private int country_id ;
+    private String country_id ;
 
     @Override
     public String toString() {
@@ -65,11 +65,11 @@ public class Locations {
         this.state_province = state_province;
     }
 
-    public int getCountry_id() {
+    public String getCountry_id() {
         return country_id;
     }
 
-    public void setCountry_id(int country_id) {
+    public void setCountry_id(String country_id) {
         this.country_id = country_id;
     }
 }
