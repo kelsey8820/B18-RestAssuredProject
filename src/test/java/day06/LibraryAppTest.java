@@ -47,6 +47,12 @@ public class LibraryAppTest {
     // it accept form param as name token value your long token
     // and return json response as user information and authority
     // assert the email of user is same as the email you used the token
+
+    // LOGIN AND DECODE REQUEST DOES NOT NEED ANY AUTHENTICATION
+    // LOGIN --->> GENERATE TOKEN
+    // DECODE --->> TAKE A TOKEN AND DECODE ITS INFO
+    // WE DO NOT NEED TO ADD HEADER YOUR LONG TOKEN TO AUTHORIZE THIS REQUEST
+
     @DisplayName("Testing POST /decode endpoint")
     @Test
     public void testDecodeJWT_Token(){
