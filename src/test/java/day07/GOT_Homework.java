@@ -31,6 +31,11 @@ public class GOT_Homework {
         // you list should have size 76 ;
 
         assertThat( houseStarkList , hasSize(76) ) ;
+        // check the list has item Eddard Stark
+        assertThat(houseStarkList, hasItem("Eddard Stark") );
+        // check the list has items  Robb Stark , Lyanna Stark , Arya Stark
+        assertThat(houseStarkList, hasItems("Robb Stark" , "Lyanna Stark" , "Arya Stark") );
+
 
 
     }
