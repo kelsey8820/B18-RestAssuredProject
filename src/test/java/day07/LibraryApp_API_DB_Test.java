@@ -3,6 +3,7 @@ package day07;
 import io.restassured.RestAssured;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
 import utility.ConfigurationReader;
 import utility.DB_Utility;
 import utility.LibraryUtil;
@@ -16,12 +17,16 @@ public class LibraryApp_API_DB_Test {
 
         RestAssured.baseURI = ConfigurationReader.getProperty("library1.base_url");
         RestAssured.basePath = "/rest/v1";
-        //TODO add a utility class that contains below method
-        libraryToken = LibraryUtil.loginAndGetToken("librarian69@library", "KNPXrm3S");
+        //added a utility class that contains below method
+        libraryToken = LibraryUtil.loginAndGetToken(ConfigurationReader.getProperty("library1.librarian_username")
+                                                  , ConfigurationReader.getProperty("library1.librarian_password"));
         DB_Utility.createConnection("library1");
 
     }
-
+    @Test
+    public void test(){
+        System.out.println("libraryToken = " + libraryToken);
+    }
 
 
     @AfterAll
