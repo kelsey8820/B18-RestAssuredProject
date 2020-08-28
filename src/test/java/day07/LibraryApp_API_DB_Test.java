@@ -5,9 +5,11 @@ import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import utility.ConfigurationReader;
 import utility.DB_Utility;
+import utility.LibraryUtil;
 
 public class LibraryApp_API_DB_Test {
 
+    private static String libraryToken ;
 
     @BeforeAll
     public static void init(){
@@ -15,10 +17,11 @@ public class LibraryApp_API_DB_Test {
         RestAssured.baseURI = ConfigurationReader.getProperty("library1.base_url");
         RestAssured.basePath = "/rest/v1";
         //TODO add a utility class that contains below method
-        //libraryToken = loginAndGetToken("librarian69@library", "KNPXrm3S");
+        libraryToken = LibraryUtil.loginAndGetToken("librarian69@library", "KNPXrm3S");
         DB_Utility.createConnection("library1");
 
     }
+
 
 
     @AfterAll
