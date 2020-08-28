@@ -8,9 +8,6 @@ import org.junit.jupiter.api.Test;
 import utility.ConfigurationReader;
 import utility.DB_Utility;
 import utility.LibraryUtil;
-
-import java.time.LocalDate;
-
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.*;
 
@@ -21,12 +18,7 @@ public class LibraryApp_API_DB_Test {
     @BeforeAll
     public static void init(){
 
-        RestAssured.baseURI = ConfigurationReader.getProperty("library1.base_url");
-        RestAssured.basePath = "/rest/v1";
-        //added a utility class that contains below method
-        libraryToken = LibraryUtil.loginAndGetToken(ConfigurationReader.getProperty("library1.librarian_username")
-                                                  , ConfigurationReader.getProperty("library1.librarian_password"));
-        DB_Utility.createConnection("library1");
+        libraryToken = LibraryUtil.setUpRestAssuredAndDB_forEnv("library1");
 
     }
     @DisplayName("Validating the /dashboard_stats endpoint data against Database")
