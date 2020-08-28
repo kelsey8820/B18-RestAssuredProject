@@ -23,9 +23,11 @@ public class LibraryApp_API_DB_Test {
         DB_Utility.createConnection("library1");
 
     }
+
     @Test
     public void test(){
         System.out.println("libraryToken = " + libraryToken);
+        // We will make a call to /Dashboard_stats endpoint and validate the data against database data
     }
 
 
