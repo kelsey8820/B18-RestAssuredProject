@@ -16,14 +16,15 @@ public class NewsAPI_Test {
     @Test
     public void testNews(){
 
-        //GET http://newsapi.org/v2/top-headlines?country=us
-        String apiToken = "YOUR TOKEN GOES HERE";
+
+        String apiToken = "YOUR TOKEN GOES HERE"; // get it from here https://newsapi.org/register
         // Via the Authorization HTTP header. Bearer
 
+        //GET http://newsapi.org/v2/top-headlines?country=us
         Response response = given()
                                     .baseUri("http://newsapi.org") // you can specify baseURI directly here if you only have one request and have no intention ofo sharing with diffferent request
                                     .basePath("/v2")
-                                    .header("Authorization", "Bearer "+apiToken)
+                                    .header("Authorization", "Bearer "+apiToken) // space between Bearer and the token required
                                     .queryParam("country","us")
                                     .log().all().
                             when().
