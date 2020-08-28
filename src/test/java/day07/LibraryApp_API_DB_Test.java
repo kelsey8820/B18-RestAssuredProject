@@ -11,6 +11,9 @@ import utility.LibraryUtil;
 
 import java.time.LocalDate;
 
+import static io.restassured.RestAssured.given;
+import static org.hamcrest.Matchers.*;
+
 public class LibraryApp_API_DB_Test {
 
     private static String libraryToken ;
@@ -43,6 +46,19 @@ public class LibraryApp_API_DB_Test {
         System.out.println("bookCount = " + bookCount);
         System.out.println("userCount = " + userCount);
         System.out.println("borrowedBookCount = " + borrowedBookCount);
+
+        given()
+                .log().all()
+                .header("x-library-token",libraryToken).
+        when()
+                .get("/dashboard_stats").
+//                .prettyPeek()
+        then()
+                .body("book_count",is(bookCount) )
+                .body("borrowed_books",is(borrowedBookCount) )
+                .body("users",is(userCount) )
+
+        ;
 
 
 
