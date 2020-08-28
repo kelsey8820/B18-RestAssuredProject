@@ -14,8 +14,8 @@ public class LibraryUtil {
         RestAssured.baseURI = ConfigurationReader.getProperty( env + ".base_url");
         RestAssured.basePath = "/rest/v1";
         //added a utility class that contains below method
-        // now we do not have access to to this library token
 
+        // Setting up DB connection by using the utility method
         DB_Utility.createConnection(env);
         // We want to return this token out of the method so the next class can use it
           return      LibraryUtil.loginAndGetToken(ConfigurationReader.getProperty(env + ".librarian_username")
