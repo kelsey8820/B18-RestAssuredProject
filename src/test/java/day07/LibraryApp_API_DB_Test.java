@@ -18,7 +18,8 @@ public class LibraryApp_API_DB_Test {
     @BeforeAll
     public static void init(){
 
-        libraryToken = LibraryUtil.setUpRestAssuredAndDB_forEnv("library2") ;
+        String active_env = ConfigurationReader.getProperty("active_env");
+        libraryToken = LibraryUtil.setUpRestAssuredAndDB_forEnv(active_env) ;
 
     }
     @DisplayName("Validating the /dashboard_stats endpoint data against Database")
