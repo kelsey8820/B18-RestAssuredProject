@@ -17,7 +17,7 @@ public class NewsAPI_Test {
     public void testNews(){
 
         //GET http://newsapi.org/v2/top-headlines?country=us
-        String apiToken = "42bb42f550eb432a90d48201b33380e5";
+        String apiToken = "YOUR TOKEN GOES HERE";
         // Via the Authorization HTTP header. Bearer
 
         Response response = given()
