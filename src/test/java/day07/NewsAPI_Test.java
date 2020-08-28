@@ -33,7 +33,7 @@ public class NewsAPI_Test {
         List<String> allAuthor =  jp.getList("articles.author") ;
         System.out.println("allAuthor = " + allAuthor.size() );
        // allAuthor.forEach( eachAuthor -> System.out.println("eachAuthor = " + eachAuthor));
-        // filter out the result by checking the source fields --->> id filed null or not
+        // filter out the result by checking the source fields  --->> id filed null or not
 
         List<String> allAuthorFiltered
                 =  jp.getList("articles.findAll { it.source.id !=null }.author") ;
