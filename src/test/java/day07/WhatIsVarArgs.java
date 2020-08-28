@@ -33,6 +33,8 @@ public class WhatIsVarArgs {
 
     // this method parameter int... nums means
     // when you call the method , it can accept any number of arguments
+    // THIS IS THE ONLY PLACE YOU CAN USE ...
+    // ANYWHERE ELSE OTEHR THAN METHOD PARAM IT WILL NOT WORK !!!!
     public static void addAllNumbersVarArgs(int... nums){
 
         int sum = 0 ;
