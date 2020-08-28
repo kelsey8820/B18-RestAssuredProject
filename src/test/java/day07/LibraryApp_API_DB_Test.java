@@ -33,6 +33,8 @@ public class LibraryApp_API_DB_Test {
         // We will make a call to /Dashboard_stats endpoint and validate the data against database data
         DB_Utility.runQuery("SELECT count(*) from books"); // it return the book count as single row and col
         String bookCount  =  DB_Utility.getColumnDataAtRow(1,1);
+        DB_Utility.runQuery("SELECT count(*) from users");
+        String userCount  =  DB_Utility.getColumnDataAtRow(1,1);
 
 
 
