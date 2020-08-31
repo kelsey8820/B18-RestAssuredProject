@@ -31,7 +31,7 @@ public class LibraryApp_DataDriven {
 
 
     @AfterAll
-    public static void cleapUp(){
+    public static void cleanUp(){
         RestAssured.reset();
     }
 
