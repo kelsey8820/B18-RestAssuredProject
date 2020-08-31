@@ -48,15 +48,19 @@ public class SpartanApiDB_Practice {
     @Test
     public void testDB(){
 
-        DB_Utility.runQuery("SELECT * FROM SPARTANS") ;
-        DB_Utility.displayAllData();
+        //DB_Utility.runQuery("SELECT * FROM SPARTANS") ;
+        //DB_Utility.displayAllData();
 
         // run this query so we can use it for expected result
         String query = "SELECT * FROM SPARTANS     " +
                        " WHERE LOWER(gender) = 'female'  " +
                        " and LOWER(name) LIKE '%a%' ";
-
-
+        DB_Utility.runQuery( query ) ;
+        //DB_Utility.displayAllData();
+        //  if you do , get the row count so we can see how many data returned
+        // and use it for expected result in next test
+        int expectedResult =  DB_Utility.getRowCount();
+        System.out.println("expectedResult = " + expectedResult);
     }
 
 
