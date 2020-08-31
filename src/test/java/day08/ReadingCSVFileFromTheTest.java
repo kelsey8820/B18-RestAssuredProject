@@ -32,6 +32,7 @@ public class ReadingCSVFileFromTheTest {
     /// specify the file source as numbers.csv
     ///  in the meantime add 3rd parameter to your test called int result
     /// assert that num1 + num2  = result
+
     @ParameterizedTest
     @CsvFileSource(resources = "/numbers.csv", numLinesToSkip = 1)
     public void testAddition(int n1, int n2, int result){
@@ -40,6 +41,20 @@ public class ReadingCSVFileFromTheTest {
 
     }
 
+    // What if I want some custom name
+        // @ParameterizedTest(name = "Some custom name here")
+    // How do I refer the row number in my csv file
+        // you can refer row number using {index} in the name String
+    // How do I refer the column data in my display name
+    // WHERE DO I ADD the display name to start with ?
+
+    @ParameterizedTest(name = "B18 Learning Math {index} ")
+    @CsvFileSource(resources = "/numbers.csv", numLinesToSkip = 1)
+    public void testAddition2(int n1, int n2, int result){
+        //import static org.junit.jupiter.api.Assertions.assertEquals;
+        assertEquals(result,n1+n2 ) ;
+
+    }
 
 
 }
