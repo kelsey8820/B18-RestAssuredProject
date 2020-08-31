@@ -29,6 +29,10 @@ public class SpartanApiDB_Practice {
      *       WHERE LOWER(gender) = 'female'
      *       and LOWER(name) LIKE '%a%' ;
      *
+     *
+     *      // Get the list of all IDs from your response
+     *      // and validate the list against all the IDs from the database
+     *
      */
     @BeforeAll
     public static void init(){
@@ -87,6 +91,53 @@ public class SpartanApiDB_Practice {
     }
 
 
+
+    @DisplayName("Testing /spartans/search Endpoint and Validate against DB for all IDs")
+    @Test
+    public void testSearchVerifyAllID(){
+
+        // make a request to GET /spartans/search
+        // using query parameter gender Female  nameContains a
+
+        Response response = given()
+                .log().all()
+                .queryParam("gender","Female")
+                .queryParam("nameContains", "a").
+                        when()
+                .get("/spartans/search")
+                .prettyPeek();
+
+        // We want to store the id list as List<String> rather than List of Integer so we can compare easily
+        // with the List<String> we got from DB Response , and no parsing needed
+        // so we used the getList method that accept 2 parameters
+        // the jsonpath to get the list and the Data type of the List you want ! -->> String.class
+        List<String> idListFromResponse = response.jsonPath().getList("content.id" , String.class) ;
+
+//        int resultCount =  response.path("numberOfElements") ;
+        //int resultCount =  response.jsonPath().getInt("numberOfElements") ;
+//        System.out.println("resultCount = " + resultCount);
+        // try at home , parameterize what you search for gender and name
+        // in both query param and this db query
+        String query = "SELECT * FROM SPARTANS     " +
+                " WHERE LOWER(gender) = 'female'  " +
+                " and LOWER(name) LIKE '%a%' ";
+        DB_Utility.runQuery(query);
+
+        List<String> idListFromDB =  DB_Utility.getColumnDataAsList(1) ;
+
+        assertEquals( idListFromResponse.size() , idListFromDB.size() ) ;
+
+        // how to assert 2 list have same content
+        assertEquals(idListFromDB, idListFromResponse);
+
+
+
+//        int expectedResult = DB_Utility.getRowCount() ;
+        // this is using junit assertion , you can use hamcrest if you want.
+//        assertEquals(expectedResult,resultCount);
+
+
+    }
 
 
     @AfterAll
