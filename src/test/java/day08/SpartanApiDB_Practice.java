@@ -1,10 +1,13 @@
 package day08;
 
 import io.restassured.RestAssured;
+import io.restassured.response.Response;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+
+import static io.restassured.RestAssured.given;
 
 public class SpartanApiDB_Practice {
 
@@ -41,6 +44,13 @@ public class SpartanApiDB_Practice {
         // make a request to GET /spartans/search
         // using query parameter gender Female  nameContains a
 
+        Response response = given()
+                                    .log().all()
+                                    .queryParam("gender","Female")
+                                    .queryParam("nameContains", "a").
+                            when()
+                                    .get("/spartans/search")
+                                    .prettyPeek();
 
 
     }
