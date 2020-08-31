@@ -6,6 +6,8 @@ import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import utility.ConfigurationReader;
+import utility.DB_Utility;
 
 import static io.restassured.RestAssured.given;
 
@@ -35,7 +37,29 @@ public class SpartanApiDB_Practice {
         RestAssured.port = 8000;
         RestAssured.basePath = "/api" ;
 
+        DB_Utility.createConnection(ConfigurationReader.getProperty("spartan1.database.url") ,
+                                    ConfigurationReader.getProperty("spartan1.database.username") ,
+                                    ConfigurationReader.getProperty("spartan1.database.password")
+                                    );
+
     }
+
+    @DisplayName("Testing out my DB Connection ")
+    @Test
+    public void testDB(){
+
+        DB_Utility.runQuery("SELECT * FROM SPARTANS") ;
+        DB_Utility.displayAllData();
+
+        // run this query so we can use it for expected result
+        String query = "SELECT * FROM SPARTANS     " +
+                       " WHERE LOWER(gender) = 'female'  " +
+                       " and LOWER(name) LIKE '%a%' ";
+
+
+    }
+
+
 
     @DisplayName("Testing /spartans/search Endpoint and Validate against DB")
     @Test
@@ -53,6 +77,7 @@ public class SpartanApiDB_Practice {
                                     .prettyPeek();
 
         int resultCount =  response.path("numberOfElements") ;
+        //int resultCount =  response.jsonPath().getInt("numberOfElements") ;
         System.out.println("resultCount = " + resultCount);
 
     }
@@ -64,6 +89,7 @@ public class SpartanApiDB_Practice {
     public static void destroy(){
 
         RestAssured.reset();
+        DB_Utility.destroy();
 
     }
 
