@@ -1,7 +1,10 @@
 package day08;
 
 import io.restassured.RestAssured;
+import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 
 public class SpartanApiDB_Practice {
 
@@ -30,6 +33,29 @@ public class SpartanApiDB_Practice {
         RestAssured.basePath = "/api" ;
 
     }
+
+    @DisplayName("Testing /spartans/search Endpoint and Validate against DB")
+    @Test
+    public void testSearch(){
+
+        // make a request to GET /spartans/search
+        // using query parameter gender Female  nameContains a
+
+
+
+    }
+
+
+
+
+    @AfterAll
+    public static void destroy(){
+
+        RestAssured.reset();
+
+    }
+
+
 
 
 
