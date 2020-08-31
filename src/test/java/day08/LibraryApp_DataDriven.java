@@ -38,7 +38,7 @@ public class LibraryApp_DataDriven {
                  .log().all()
                 .contentType(ContentType.URLENC)
                 .formParam("email", user )
-                 .formParam("password" , pass).
+                .formParam("password" , pass).
          when()
                  .post("/login").
          then()
