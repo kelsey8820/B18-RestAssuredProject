@@ -52,6 +52,8 @@ public class SpartanApiDB_Practice {
                                     .get("/spartans/search")
                                     .prettyPeek();
 
+        int resultCount =  response.path("numberOfElements") ;
+        System.out.println("resultCount = " + resultCount);
 
     }
 
