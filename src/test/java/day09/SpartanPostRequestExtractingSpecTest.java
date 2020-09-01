@@ -26,7 +26,8 @@ public class SpartanPostRequestExtractingSpecTest {
     @DisplayName("Extracting the requestSpec and responseSpec practice")
     @Test
     public void test(){
-
+        // make a post request and assert the status code header and body
+        // eventually extract out the spec for reuse
     }
 
 
