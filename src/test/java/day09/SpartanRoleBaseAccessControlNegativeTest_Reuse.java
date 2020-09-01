@@ -40,10 +40,11 @@ public class SpartanRoleBaseAccessControlNegativeTest_Reuse {
         // We will be using a class called ResponseSpecBuilder
         ResponseSpecBuilder resSpecBuilder = new ResponseSpecBuilder() ;
         // Getting the reusable ResponseSpecification object using the builder methods chaining
-        ResponseSpecification responseSpec = resSpecBuilder.expectStatusCode(403)
-                                              .expectContentType(ContentType.JSON)
-                                              .expectHeader("Date", notNullValue(String.class)  )
-                                              .build(); // build method will return ResponseSpecification
+        ResponseSpecification responseSpec = resSpecBuilder
+                                                .expectStatusCode(403)
+                                                .expectContentType(ContentType.JSON)
+                                                .expectHeader("Date", notNullValue(String.class)  )
+                                                .build(); // build method will return ResponseSpecification
 
                             // expectHeader second argument expect a Matcher<String>
                             // but notNullValue() return a Matcher<Object> so it did not compile
