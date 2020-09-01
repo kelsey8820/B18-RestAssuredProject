@@ -16,6 +16,10 @@ import static org.hamcrest.Matchers.*;
 
 public class SpartanPostRequestExtractingSpecTest {
 
+    static ResponseSpecification validPostRequestSpec;
+    static ResponseSpecification validPostResponseSpec ;
+
+
     @BeforeAll
     public static void init(){
         RestAssured.baseURI = "http://54.160.106.84";
@@ -30,6 +34,10 @@ public class SpartanPostRequestExtractingSpecTest {
         // eventually extract out the spec for reuse
 
         Spartan randomSp = createRandomSpartanObject();
+
+        // validPostRequestSpec
+        // so we want to add the auth , contentType , randomBody , logging
+        // into the request spec
 
         given()
                 .auth().basic("admin","admin")
