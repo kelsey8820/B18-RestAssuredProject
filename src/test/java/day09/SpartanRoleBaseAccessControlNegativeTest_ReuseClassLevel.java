@@ -20,6 +20,10 @@ public class SpartanRoleBaseAccessControlNegativeTest_ReuseClassLevel {
     static RequestSpecification requestSpec ;
     static ResponseSpecification responseSpec ;
 
+    // If your application api have lots of repeating part in the request and response assertion
+    // you can create a utility class for different type of request spec and response spec
+    // to reuse in your tests everywhere and it will make it easy to write and maintain in the long run.
+
     @BeforeAll
     public static void init(){
         RestAssured.baseURI = "http://54.160.106.84";
