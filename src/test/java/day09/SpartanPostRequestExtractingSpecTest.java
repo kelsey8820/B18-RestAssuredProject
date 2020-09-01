@@ -25,6 +25,24 @@ public class SpartanPostRequestExtractingSpecTest {
         RestAssured.baseURI = "http://54.160.106.84";
         RestAssured.port = 8000;
         RestAssured.basePath = "/api";
+        // preparing the body for request spec
+        Spartan randomSp = createRandomSpartanObject();
+        validPostRequestSpec = given()
+                                .auth().basic("admin","admin")
+                                .accept(ContentType.JSON)   // what type you want from the server as response
+                                .contentType(ContentType.JSON) // what type you are sending to the server
+                                .body(randomSp)
+                                .log().all();
+
+
+//                                .body("success",is("A Spartan is Born!") )
+////                .body("data.name" , is(  randomSp.getName()  )   )
+////                .body("data.gender" , is(  randomSp.getGender()  )   )
+////                .body("data.phone" , is(  randomSp.getPhone()  )   )
+////                .body("data.id", notNullValue() )
+
+
+
     }
 
     @DisplayName("Extracting the requestSpec and responseSpec practice")
@@ -40,22 +58,19 @@ public class SpartanPostRequestExtractingSpecTest {
         // into the request spec
 
         given()
-                .auth().basic("admin","admin")
-                .accept(ContentType.JSON)   // what type you want from the server as response
-                .contentType(ContentType.JSON) // what type you are sending to the server
-                .body(randomSp)
-                .log().all().
+                .spec(validPostRequestSpec).
         when()
                 .post("/spartans").
         then()
-                .log().all()
-                .statusCode(201)
-                .header("Date" , notNullValue() )
-                .body("success",is("A Spartan is Born!") )
-                .body("data.name" , is(  randomSp.getName()  )   )
-                .body("data.gender" , is(  randomSp.getGender()  )   )
-                .body("data.phone" , is(  randomSp.getPhone()  )   )
-                .body("data.id", notNullValue() )
+                .spec(validPostResponseSpec)
+//                .log().all()
+//                .statusCode(201)
+//                .header("Date" , notNullValue() )
+//                .body("success",is("A Spartan is Born!") )
+//                .body("data.name" , is(  randomSp.getName()  )   )
+//                .body("data.gender" , is(  randomSp.getGender()  )   )
+//                .body("data.phone" , is(  randomSp.getPhone()  )   )
+//                .body("data.id", notNullValue() )
                 ;
 
     }
