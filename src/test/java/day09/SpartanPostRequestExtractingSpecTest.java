@@ -34,6 +34,18 @@ public class SpartanPostRequestExtractingSpecTest {
                                 .body(randomSp)
                                 .log().all();
 
+        ResponseSpecBuilder resSpecBuilder = new ResponseSpecBuilder();
+        validPostResponseSpec  =    resSpecBuilder
+                                        .expectStatusCode(201)
+                                        .expectHeader("Date", notNullValue(String.class) )
+                                        .log(LogDetail.ALL)
+                                        .expectBody("success", is("A Spartan is Born!") )
+                                        .expectBody("data.name" , is( randomSp.getName() )  )
+                                        .expectBody("data.gender" , is( randomSp.getGender() )  )
+                                        .expectBody("data.phone" , is( randomSp.getPhone() )  )
+                                        .expectBody("data.id" ,  notNullValue() )
+                                        .build();
+                                ;
 
 //                                .body("success",is("A Spartan is Born!") )
 ////                .body("data.name" , is(  randomSp.getName()  )   )
