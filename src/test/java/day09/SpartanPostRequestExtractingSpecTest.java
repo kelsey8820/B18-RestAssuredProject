@@ -28,6 +28,28 @@ public class SpartanPostRequestExtractingSpecTest {
     public void test(){
         // make a post request and assert the status code header and body
         // eventually extract out the spec for reuse
+
+        Spartan randomSp = createRandomSpartanObject();
+
+        given()
+                .auth().basic("admin","admin")
+                .accept(ContentType.JSON)   // what type you want from the server as response
+                .contentType(ContentType.JSON) // what type you are sending to the server
+                .body(randomSp)
+                .log().all().
+        when()
+                .post("/spartans").
+        then()
+                .log().all()
+                .statusCode(201)
+                .header("Date" , notNullValue() )
+                .body("success",is("A Spartan is Born!") )
+                .body("data.name" , is(  randomSp.getName()  )   )
+                .body("data.gender" , is(  randomSp.getGender()  )   )
+                .body("data.phone" , is(  randomSp.getPhone()  )   )
+                .body("data.id", notNullValue() )
+                ;
+
     }
 
 
