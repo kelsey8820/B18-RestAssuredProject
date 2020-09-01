@@ -16,7 +16,7 @@ import static org.hamcrest.Matchers.*;
 
 public class SpartanPostRequestExtractingSpecTest {
 
-    static ResponseSpecification validPostRequestSpec;
+    static RequestSpecification validPostRequestSpec;
     static ResponseSpecification validPostResponseSpec ;
 
 
