@@ -12,8 +12,7 @@ import org.junit.jupiter.api.Test;
 import pojo.Spartan;
 
 import static io.restassured.RestAssured.given;
-import static org.hamcrest.Matchers.is;
-import static org.hamcrest.Matchers.notNullValue;
+import static org.hamcrest.Matchers.*;
 
 public class SpartanRoleBaseAccessControlNegativeTest_ReuseClassLevel {
 
