@@ -3,6 +3,7 @@ package day09;
 import io.restassured.RestAssured;
 import io.restassured.builder.RequestSpecBuilder;
 import io.restassured.builder.ResponseSpecBuilder;
+import io.restassured.filter.log.LogDetail;
 import io.restassured.http.ContentType;
 import io.restassured.specification.RequestSpecification;
 import io.restassured.specification.ResponseSpecification;
@@ -44,6 +45,7 @@ public class SpartanRoleBaseAccessControlNegativeTest_Reuse {
                                                 .expectStatusCode(403)
                                                 .expectContentType(ContentType.JSON)
                                                 .expectHeader("Date", notNullValue(String.class)  )
+                                                .log(LogDetail.ALL)
                                                 .build(); // build method will return ResponseSpecification
 
                             // expectHeader second argument expect a Matcher<String>
