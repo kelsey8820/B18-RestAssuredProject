@@ -1,6 +1,7 @@
 package day09;
 
 import io.restassured.RestAssured;
+import io.restassured.http.ContentType;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -21,6 +22,20 @@ public class SpartanRoleBaseAccessControlNegativeTest {
     @DisplayName("User should not be able to delete data")
     @Test
     public void testUserCanNotDeleteData(){
+
+        given()
+                .auth().basic("user","user")
+                .accept(ContentType.JSON)
+                .log().all().
+        when()
+                .delete("/spartans/{id}" , 10).
+        then()
+                .statusCode(403)
+                .contentType(ContentType.JSON)
+                .header("Date", is( notNullValue() ) ) // checking Date header is not null
+                .log().all();
+
+
 
     }
 
