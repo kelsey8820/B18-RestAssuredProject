@@ -5,6 +5,8 @@ import io.restassured.response.Response;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvFileSource;
 
+import java.util.List;
+
 import static io.restassured.RestAssured.*;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
@@ -27,18 +29,24 @@ public class ZipDataDriven {
                          .baseUri("http://api.zippopotam.us/us").
                  when()
                         .get("/{state}/{city}")
-                        .prettyPeek() ;
-
+                        //.prettyPeek()  // Done peeking
+                        ;
          // assert the state and city match in the response
         JsonPath jp = response.jsonPath() ;
         // why do we use single quote? because there can not be a space in json path
         // we are using the '' to treat the 2 word as one
-        System.out.println("state = " + jp.getString("'state abbreviation'")  ) ;
-        System.out.println("city = "  + jp.getString("'place name'"));
-
+        System.out.println("actual state = " + jp.getString("'state abbreviation'")  ) ;
+        System.out.println("actual city = "  + jp.getString("'place name'"));
+        // asserting actual result from response to expected result from csv file
         assertThat( jp.getString("'state abbreviation'"), is(expectedState) );
         assertThat( jp.getString("'place name'"), is(expectedCity) );
 
+        // now we want to count how many item in jsonArray from the respons e
+        // and validate that against our csv file expected numbers
+        // since post code key has space in between we have to add '' to treat it as one
+        List<String> zipList = jp.getList("places.'post code'") ;
+        System.out.println("zipList = " + zipList);
+        assertThat(zipList , hasSize( numberOfZipcodes ) );
 
                  //.get("/{state}/{city}" , state , city )
     }
