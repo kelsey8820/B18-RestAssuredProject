@@ -61,18 +61,13 @@ public class SpartanRoleBaseAccessControlNegativeTest_ReuseClassLevel {
         Spartan spartanObj = new Spartan("some name", "Male", 8888888888L) ;
 
         given()
-                .auth().basic("user","user")
-                .accept(ContentType.JSON)
-                .log().all()
+                .spec(requestSpec)
                 .contentType(ContentType.JSON)
                 .body(spartanObj).
         when()
                 .put("/spartans/{id}", 10).
         then()
-                .statusCode(403)
-                .contentType(ContentType.JSON)
-                .header("Date", is( notNullValue() ) ) // checking Date header is not null
-                .log().all();
+                .spec(responseSpec) ;
 
 
     }
