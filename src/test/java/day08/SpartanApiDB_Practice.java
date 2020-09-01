@@ -9,7 +9,9 @@ import org.junit.jupiter.api.Test;
 import utility.ConfigurationReader;
 import utility.DB_Utility;
 
+import java.util.List;
 import static io.restassured.RestAssured.given;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class SpartanApiDB_Practice {
 
