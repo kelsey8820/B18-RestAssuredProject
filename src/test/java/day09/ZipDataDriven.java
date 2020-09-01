@@ -15,15 +15,15 @@ public class ZipDataDriven {
 
     @ParameterizedTest
     @CsvFileSource(resources = "/state_city.csv", numLinesToSkip = 1)
-    public void testStateCity(String state, String city, int numberOfZipcodes){
+    public void testStateCity(String expectedState, String expectedCity, int numberOfZipcodes){
 
 //        System.out.println("state = " + state);
 //        System.out.println("city = " + city);
 //        System.out.println("numberOfZipcodes = " + numberOfZipcodes);
          //import io.restassured.response.Response;
          Response response = given()
-                         .pathParam("state", state)
-                         .pathParam("city", city)
+                         .pathParam("state", expectedState)
+                         .pathParam("city", expectedCity)
                          .baseUri("http://api.zippopotam.us/us").
                  when()
                         .get("/{state}/{city}")
@@ -31,8 +31,13 @@ public class ZipDataDriven {
 
          // assert the state and city match in the response
         JsonPath jp = response.jsonPath() ;
+        // why do we use single quote? because there can not be a space in json path
+        // we are using the '' to treat the 2 word as one
         System.out.println("state = " + jp.getString("'state abbreviation'")  ) ;
-//        assertThat("", is());
+        System.out.println("city = "  + jp.getString("'place name'"));
+
+        assertThat( jp.getString("'state abbreviation'"), is(expectedState) );
+        assertThat( jp.getString("'place name'"), is(expectedCity) );
 
 
                  //.get("/{state}/{city}" , state , city )
