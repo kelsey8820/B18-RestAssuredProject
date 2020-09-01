@@ -2,6 +2,7 @@ package day09;
 
 import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvFileSource;
 
@@ -54,6 +55,21 @@ public class ZipDataDriven {
         System.out.println("calling the size method directly in jsonPath = "
                                     + jp.getInt("places.size()"));
       
+    }
+
+    @Test
+    public void testSingle(){
+
+        Response response = given()
+                                .pathParam("state", "VA")
+                                .pathParam("city", "Fairfax")
+                                .baseUri("http://api.zippopotam.us/us").
+                            when()
+                                .get("/{state}/{city}") ;
+        // you can use then method to keep chaining your response assertions
+        response.then().statusCode(200) ;
+
+
     }
 
 
