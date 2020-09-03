@@ -9,6 +9,7 @@ import utility.DB_Utility;
 import java.util.Map;
 
 import static io.restassured.RestAssured.*;
+import static org.hamcrest.Matchers.*;
 
 public class GetTestDataFromSpartanDatabase {
 
@@ -43,6 +44,26 @@ public class GetTestDataFromSpartanDatabase {
         String nameFromDB   = firstRowMap.get("NAME") ;
         String genderFromDB = firstRowMap.get("GENDER") ;
         long phoneFromDB    = Long.parseLong(firstRowMap.get("PHONE"));
+
+                when()
+                    .get("/spartans/{id}" , idFromDB ).
+                then()
+                        .log().all()
+                    .statusCode(200)
+                    .body("id",  is(idFromDB) )
+                    .body("name",  is(nameFromDB) )
+                    .body("gender", is(genderFromDB))
+                    // the test is failing if the phone number fall within the range of int
+                        // because body method is just getting it as int
+                        // and we can not compare int with long since they are not same data type
+                        // can I just convert
+                        // my phone value from response to long directly inside jsonPath
+                        // YES WE CAN ! Because jsonPath is groovy , we can call groovy function
+                        // WAIT !! I DO NOT KNOW THE METHOD!!! --->> GOOGLE!!
+                        // I found If I add toLong() to the int value , it's turning it into long value
+                        // now we will try it out.
+                    .body("phone.toLong()", is(phoneFromDB) ) ;
+
 
 
     }
