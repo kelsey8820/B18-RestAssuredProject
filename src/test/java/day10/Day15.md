@@ -91,7 +91,7 @@ Using Project lombok is 2 step process is IntelliJ Idea
 or IntelliJ `Preference --search plugins --Marketplace-- Lombok` as below
 * Intall it and restart the IDE to take affect. (Say yes to any pop-up) 
 
-![How to Do it](./src/test/resources/gifs/How_To_Install_Lombok_Plugin_in_IntelliJ.gif")
+![How install plugin](../../../../src/test/resources/gifs/How_To_Install_Lombok_Plugin_in_IntelliJ.gif "How to do install plugin")
 
 Once you completed previous steps you can use all powerful Lombok annotations to remove boilerplate repetitive codes. 
 
