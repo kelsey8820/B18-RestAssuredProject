@@ -151,9 +151,9 @@ public class LombokTest {
 ### The challenges :
 
 * Dynamic data --
-   a data that change often and can not be reused for next test. 
-* Data is not sync between environment 
-    data that exists in one environment does not exists in another and test fail because of it. 
+   Type of data that changes often and can not be reused for next test. 
+* Data is not sync between environment.
+* Data that exists in one environment does not exists in another and casue test failure.
 
 ### What's your approach to handle them ? 
 * If the data change often and you have access to DB
@@ -203,7 +203,7 @@ Steps :
                 .body("id",  is(idFromDB) )
                 .body("name",  is(nameFromDB) )
                 .body("gender", is(genderFromDB))
-                // converting the phoen to long to avoid error
+                // converting the phone to long to avoid error
                 .body("phone.toLong()", is(phoneFromDB) ) ;
 ```
  5. Switched the different IP Addresses to see if it still work
