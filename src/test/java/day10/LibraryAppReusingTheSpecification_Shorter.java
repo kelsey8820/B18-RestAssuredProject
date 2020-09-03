@@ -10,6 +10,7 @@ import io.restassured.specification.ResponseSpecification;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import pojo.Category;
 import pojo.User;
 import utility.ConfigurationReader;
 import utility.LibraryUtil;
@@ -53,9 +54,10 @@ public class LibraryAppReusingTheSpecification_Shorter {
     @Test
     public void testLibrary(){
 
-         when()
-                 .get("/get_book_categories")
-           ;
+         Response response = when()
+                 .get("/get_book_categories");
+         List<Category> categoryList = response.jsonPath().getList("", Category.class) ;
+        System.out.println("categoryList = " + categoryList);
 
     }
 
