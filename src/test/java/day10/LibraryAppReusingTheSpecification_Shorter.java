@@ -3,6 +3,7 @@ package day10;
 import io.restassured.RestAssured;
 import io.restassured.filter.log.LogDetail;
 import io.restassured.http.ContentType;
+import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
 import io.restassured.specification.ResponseSpecification;
 import org.junit.jupiter.api.BeforeAll;
@@ -10,6 +11,8 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import utility.ConfigurationReader;
 import utility.LibraryUtil;
+
+import java.util.Map;
 
 import static io.restassured.RestAssured.*;
 
@@ -31,10 +34,18 @@ public class LibraryAppReusingTheSpecification_Shorter {
         // we are using the static field of RestAssured to set it at global level
         RestAssured.responseSpecification =  expect().statusCode(200)       // expecting the Response status code 200
                                                 .contentType(ContentType.JSON)  // contentType is json
-                                                .logDetail(LogDetail.ALL) ;     // want to log all of them
+                                                .log().all();     // want to log all of them
 
     }
 
+    /**
+     * Practice the De-Serialization using the same test
+     * get the Map<String,String> object out of the response of GET /dashboard_stats
+     * get the List<Category> object from the response of GET /get_book_categories
+     * get the List<User> object from the response of GET /get_all_users
+     * hint : you will need to create 2 POJO class called Category , User;
+     *
+     */
     @DisplayName("Testing GET /get_book_categories Endpoint with spec")
     @Test
     public void testLibrary(){
@@ -55,13 +66,17 @@ public class LibraryAppReusingTheSpecification_Shorter {
 
     }
 
+    //* get the Map<String,String> object out of the response of GET /dashboard_stats
     @DisplayName("Testing GET /dashboard_stats Endpoint with spec")
     @Test
     public void testGet_Dashboard_stats(){
 
 
-                when()
-                .get(" /dashboard_stats");
+        Response response =  when().get(" /dashboard_stats").prettyPeek();
+        // if there is no path needed to get to what you are looking for
+        // or if you wanted to point to your entire response , you can just provide ""
+        Map<String,Integer> statMap = response.jsonPath().getMap("") ;
+        System.out.println("statMap = " + statMap);
 
     }
 
