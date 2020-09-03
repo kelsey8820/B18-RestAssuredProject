@@ -59,6 +59,17 @@ public class LibraryAppReusingTheSpecification_Shorter {
          List<Category> categoryList = response.jsonPath().getList("", Category.class) ;
         System.out.println("categoryList = " + categoryList);
 
+        // above code is great , but what if I wanted to
+        // store each category as map rather than pojo
+        // Each category is key value pair --->> Map
+        // and we have many category  --->> List<Map>
+        // jsonPath methods always try to help to convert the types where it can
+        // in this case , each category in jsonArray we tryied to store into map then get a list out of it
+        // and Jackson databind take care of all conversion
+        //List< Map<String,String> > categoryMapList = response.jsonPath().getList("");
+        List< Map<Integer,String> > categoryMapList = response.jsonPath().getList("");
+        System.out.println("categoryMapList = " + categoryMapList);
+
     }
 
     @DisplayName("Testing GET /get_all_users Endpoint with spec")
