@@ -82,9 +82,9 @@ public class GetTestDataFromSpartanDatabase {
         // so first I need to get the row count so I can set the max of my random number
         int rowCount = DB_Utility.getRowCount();
         // get a random number from 1 to rowCount value
-        int randomID = new Faker().number().numberBetween(1, rowCount) ;
-        Map<String, String> randomRowMap = DB_Utility.getRowMap(randomID);
-        System.out.println("CURRENT ID IS "+ randomID);
+        int randomRowNum = new Faker().number().numberBetween(1, rowCount) ;
+        Map<String, String> randomRowMap = DB_Utility.getRowMap(randomRowNum);
+        System.out.println("CURRENT ID IS "+ randomRowNum);
         System.out.println("CURRENT ROW DATA IS "+ randomRowMap);
 
 
