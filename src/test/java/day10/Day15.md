@@ -146,4 +146,52 @@ public class LombokTest {
 }
 ```
 
+## How do you handle data issue in your automation ? 
 
+### The challenges :
+
+* Dynamic data --
+   a data that change often and can not be reused for next test. 
+* Data is not sync between environment 
+    data that exists in one environment does not exists in another and test fail because of it. 
+
+### What's your approach to handle them ? 
+* If the data change often and you have access to DB
+  * Query the database to get up to date data and feed the data to your test. 
+* If you do not have access to DB but have access to API
+  * Send the request to the endpoint that return your data and get the fields that you want using jsonPath. 
+* If you do not have data : **CREATE IT FIRST** then use that new data for your test. 
+  * You may create it from the UI Directly if the flow is available. 
+  * If UI is not ready, but you have access to the API endpoint to create data, you may send `POST` request to add randomized data and use it for the test.
+  * last option(probably you will never have access to) is , inject the data directly from the database, you may ask for DBA help if that's the option. 
+
+---- 
+#### Example of getting the data from database to feed our API Test
+
+Problem Set : 
+> Assuming we just got several Spartan server IP addresses that we have DB acccess to.
+>  
+> We want to run a test on `GET /spartans/{id}`. 
+> Data is so dynamic and different by environment to envieonment. 
+> We are constantly getting `404` error because the data does not exists
+
+Approach :
+> Since we know there are lots of data already exists, we just needed to pick the correct id, we decided to make a conneciton to the database and get the latest available data to run the test (also thought about getting random data each time.)
+
+Steps : 
+1. Using utility to make a connection to `Spartan Database` and ran below query :  
+```SQL 
+    SELECT * FROM SPARTANS ORDER BY SPARTAN_ID DESC ;
+```
+2. Using the utility method `getRowMap(1)` to get the first row as `Map<String,String>` and saved it as appropriate data type: 
+ ```java
+    Map<String, String> firstRowMap = DB_Utility.getRowMap(1);
+    int id = Integer.parseInt(firstRowMap.get("SPARTAN_ID"));
+    String name = firstRowMap.get("NAME");
+    String gender = firstRowMap.get("GENDER");
+    long phone =Long.parseLong(firstRowMap.get("PHONE"));
+ ```
+ 3. Use the id to send the ```GET /spartans/{id}``` request using RestAssured. 
+ 4. use the `name`,`gender`,`phone` we got from the DB as expected result to validate the json response we got from the request. 
+ 5. Switched the different IP Addresses to see if it still work
+ 6. _Pending_ : Some IPs did not return any data so planning to create data any time  ```SELECT count(*) FROM SPARTANS``` return 0; 
