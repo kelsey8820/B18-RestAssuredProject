@@ -31,7 +31,7 @@ public class LibraryAppReusingTheSpecification {
                          .header("x-library-token", theToken) ; // we want to set the token header
         // is there easy way to directly create ResponseSpec object without the builder , YES THERE IS !!!!
         responseSpec =  expect().statusCode(200)       // expecting the Response status code 200
-                                .contentType(ContentType.JSON)  // contentype is josn
+                                .contentType(ContentType.JSON)  // contentType is json
                                 .logDetail(LogDetail.ALL) ;     // want to log all of them
 
     }
@@ -49,5 +49,19 @@ public class LibraryAppReusingTheSpecification {
 
     }
 
+    @DisplayName("Testing GET /get_all_users Endpoint with spec")
+    @Test
+    public void testGetAllUsers(){
+
+         given()
+                 .spec(requestSpec).
+         when()
+                 .get(" /get_all_users").
+         then()
+                 .spec(responseSpec)
+                 ;
+
+
+    }
 
 }
