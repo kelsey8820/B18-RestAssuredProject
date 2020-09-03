@@ -83,9 +83,28 @@ public class GetTestDataFromSpartanDatabase {
         int rowCount = DB_Utility.getRowCount();
         // get a random number from 1 to rowCount value
         int randomRowNum = new Faker().number().numberBetween(1, rowCount) ;
+
         Map<String, String> randomRowMap = DB_Utility.getRowMap(randomRowNum);
-        System.out.println("CURRENT ID IS "+ randomRowNum);
+        System.out.println("CURRENT ROW IS "+ randomRowNum);
         System.out.println("CURRENT ROW DATA IS "+ randomRowMap);
+
+        // EVERYTHING ELSE IS EXACTLY THE SAME OTHER THAN THE MAP NAME
+        int idFromDB        = Integer.parseInt( randomRowMap.get("SPARTAN_ID") );
+        String nameFromDB   = randomRowMap.get("NAME") ;
+        String genderFromDB = randomRowMap.get("GENDER") ;
+        long phoneFromDB    = Long.parseLong(randomRowMap.get("PHONE"));
+
+        given()
+                .log().uri().
+        when()
+                .get("/spartans/{id}" , idFromDB ).
+                then()
+                .log().all()
+                .statusCode(200)
+                .body("id",  is(idFromDB) )
+                .body("name",  is(nameFromDB) )
+                .body("gender", is(genderFromDB))
+                .body("phone.toLong()", is(phoneFromDB) ) ;
 
 
 

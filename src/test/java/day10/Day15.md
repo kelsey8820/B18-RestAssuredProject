@@ -206,5 +206,48 @@ Steps :
                 // converting the phoen to long to avoid error
                 .body("phone.toLong()", is(phoneFromDB) ) ;
 ```
- 1. Switched the different IP Addresses to see if it still work
- 2. _Pending_ : Some IPs did not return any data so planning to create data any time  ```SELECT count(*) FROM SPARTANS``` return 0; 
+ 5. Switched the different IP Addresses to see if it still work
+ 6. _Pending_ : Some IPs did not return any data so planning to create data any time  ```SELECT count(*) FROM SPARTANS``` return 0; 
+ 7. As time went by , we realized when we read the latest data, it's always reading same data since no new data has been created for a while. so we decided to randomize the data we got by doint below 
+   ```java
+     Map<String, String> firstRowMap = DB_Utility.getRowMap(RANDOM_ID_WITHIN_THE_RANGE);
+   ```
+Our range is from row 1 till the last row count. 
+In order to get the last row count , we can call the utility method as below: 
+   ```java
+     int rowCount = DB_Utility.getRowCount();
+   ```
+In order to get random row number between 1 to row count, 
+we can use faker: 
+   ```java
+     int randomRowNum = new Faker().number().numberBetween(1, rowCount) ;
+   ```
+Now when we call the method we are passing random row number each time. 
+Our test is more robust and practical. 
+```java 
+Map<String, String> randomRowMap = DB_Utility.getRowMap(randomRowNum);
+        System.out.println("CURRENT ROW IS "+ randomRowNum);
+        System.out.println("CURRENT ROW DATA IS "+ randomRowMap);
+```
+Saving the data from Database for the test use: 
+```java
+        int idFromDB        = Integer.parseInt( randomRowMap.get("SPARTAN_ID") );
+        String nameFromDB   = randomRowMap.get("NAME") ;
+        String genderFromDB = randomRowMap.get("GENDER") ;
+        long phoneFromDB    = Long.parseLong(randomRowMap.get("PHONE"));
+```
+Now we can take same rest assured action to make our test data and assertion dynamic in any environment that has data. 
+```java
+       given()
+                .log().uri().
+        when()
+                .get("/spartans/{id}" , idFromDB ).
+                then()
+                .log().all()
+                .statusCode(200)
+                .body("id",  is(idFromDB) )
+                .body("name",  is(nameFromDB) )
+                .body("gender", is(genderFromDB))
+                .body("phone.toLong()", is(phoneFromDB) ) ;
+```
+
