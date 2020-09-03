@@ -61,6 +61,19 @@ public class LibraryAppReusingTheSpecification {
                  .spec(responseSpec)
                  ;
 
+    }
+
+    @DisplayName("Testing GET /dashboard_stats Endpoint with spec")
+    @Test
+    public void testGet_Dashboard_stats(){
+
+        given()
+                .spec(requestSpec).
+                when()
+                .get(" /dashboard_stats").
+                then()
+                .spec(responseSpec)
+        ;
 
     }
 
