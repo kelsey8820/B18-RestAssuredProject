@@ -3,15 +3,18 @@ package day10;
 import io.restassured.RestAssured;
 import io.restassured.filter.log.LogDetail;
 import io.restassured.http.ContentType;
+import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
 import io.restassured.specification.ResponseSpecification;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import pojo.User;
 import utility.ConfigurationReader;
 import utility.LibraryUtil;
 
+import java.util.List;
 import java.util.Map;
 
 import static io.restassured.RestAssured.*;
@@ -61,8 +64,10 @@ public class LibraryAppReusingTheSpecification_Shorter {
     public void testGetAllUsers(){
 
 
-         when()
-                 .get(" /get_all_users");
+        Response response =  when().get(" /get_all_users");
+        JsonPath jp = response.jsonPath();
+        List<User> allUserLst = jp.getList("", User.class) ;
+        System.out.println("allUserLst = " + allUserLst);
 
     }
 
