@@ -4,6 +4,7 @@ import io.restassured.RestAssured;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import utility.ConfigurationReader;
 import utility.DB_Utility;
 
 import java.util.Map;
@@ -17,8 +18,7 @@ public class GetTestDataFromSpartanDatabase {
     @BeforeAll
     public static void init(){
 
-        RestAssured.baseURI = "http://54.174.216.245/" ;
-        RestAssured.port = 8000;
+        RestAssured.baseURI = ConfigurationReader.getProperty("spartan1.base_url");
         RestAssured.basePath = "/api" ;
         DB_Utility.createConnection("spartan1");
 
@@ -53,6 +53,7 @@ public class GetTestDataFromSpartanDatabase {
                     .body("id",  is(idFromDB) )
                     .body("name",  is(nameFromDB) )
                     .body("gender", is(genderFromDB))
+                    .body("phone.toLong()", is(phoneFromDB) ) ;
                     // the test is failing if the phone number fall within the range of int
                         // because body method is just getting it as int
                         // and we can not compare int with long since they are not same data type
@@ -62,7 +63,7 @@ public class GetTestDataFromSpartanDatabase {
                         // WAIT !! I DO NOT KNOW THE METHOD!!! --->> GOOGLE!!
                         // I found If I add toLong() to the int value , it's turning it into long value
                         // now we will try it out.
-                    .body("phone.toLong()", is(phoneFromDB) ) ;
+
 
 
 
