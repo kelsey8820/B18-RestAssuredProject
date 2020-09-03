@@ -66,7 +66,19 @@ RestAssured.responseSpecification = expect()..somespec ;
         System.out.println("statMap = " + statMap);
 ```
  2. get the `List<Category>` object from the response of **GET /get_book_categories**
+```java
+         Response response = when()
+                 .get("/get_book_categories");
+         List<Category> categoryList = response.jsonPath().getList("", Category.class) ;
+        System.out.println("categoryList = " + categoryList);
+```
  3. get the `List<User>` object from the response of **GET /get_all_users**
+```java 
+        Response response =  when().get(" /get_all_users");
+        JsonPath jp = response.jsonPath();
+        List<User> allUserLst = jp.getList("", User.class) ;
+        System.out.println("allUserLst = " + allUserLst);
+```
 
 >hint : you will need to create 2 POJO class called `Category` , `User`; 
 ----
@@ -91,7 +103,7 @@ Using Project lombok is 2 step process is IntelliJ Idea
 or IntelliJ `Preference --search plugins --Marketplace-- Lombok` as below
 * Intall it and restart the IDE to take affect. (Say yes to any pop-up) 
 
-![How install plugin](../../../../src/test/resources/gifs/How_To_Install_Lombok_Plugin_in_IntelliJ.gif "How to do install plugin")
+![How install plugin](../../resources/gifs/How_To_Install_Lombok_Plugin_in_IntelliJ.gif "How to do install plugin")
 
 Once you completed previous steps you can use all powerful Lombok annotations to remove boilerplate repetitive codes. 
 
