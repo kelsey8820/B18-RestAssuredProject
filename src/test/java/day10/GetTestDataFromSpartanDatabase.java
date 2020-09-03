@@ -1,5 +1,6 @@
 package day10;
 
+import com.github.javafaker.Faker;
 import io.restassured.RestAssured;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
@@ -64,6 +65,27 @@ public class GetTestDataFromSpartanDatabase {
                         // I found If I add toLong() to the int value , it's turning it into long value
                         // now we will try it out.
 
+
+
+
+    }
+
+
+    @DisplayName("Testing GET /Spartans/{id} by getting the RANDOM id from DB")
+    @Test
+    public void testDataFromDB_RandomLy(){
+
+        String myQuery = "SELECT * FROM SPARTANS ORDER BY SPARTAN_ID DESC" ;
+        DB_Utility.runQuery( myQuery ) ;
+        // we want to get the rowNum for below method randomly from 1 till the last row count
+        // so I can always get different data for my test
+        // so first I need to get the row count so I can set the max of my random number
+        int rowCount = DB_Utility.getRowCount();
+        // get a random number from 1 to rowCount value
+        int randomID = new Faker().number().numberBetween(1, rowCount) ;
+        Map<String, String> randomRowMap = DB_Utility.getRowMap(randomID);
+        System.out.println("CURRENT ID IS "+ randomID);
+        System.out.println("CURRENT ROW DATA IS "+ randomRowMap);
 
 
 

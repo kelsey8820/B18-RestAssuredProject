@@ -192,6 +192,19 @@ Steps :
     long phone =Long.parseLong(firstRowMap.get("PHONE"));
  ```
  3. Use the id to send the ```GET /spartans/{id}``` request using RestAssured. 
+```java 
+    when().get("/spartans/{id}" , idFromDB )... ; 
+```
  4. use the `name`,`gender`,`phone` we got from the DB as expected result to validate the json response we got from the request. 
- 5. Switched the different IP Addresses to see if it still work
- 6. _Pending_ : Some IPs did not return any data so planning to create data any time  ```SELECT count(*) FROM SPARTANS``` return 0; 
+```java 
+    ...then()
+                .log().all()
+                .statusCode(200)
+                .body("id",  is(idFromDB) )
+                .body("name",  is(nameFromDB) )
+                .body("gender", is(genderFromDB))
+                // converting the phoen to long to avoid error
+                .body("phone.toLong()", is(phoneFromDB) ) ;
+```
+ 1. Switched the different IP Addresses to see if it still work
+ 2. _Pending_ : Some IPs did not return any data so planning to create data any time  ```SELECT count(*) FROM SPARTANS``` return 0; 
