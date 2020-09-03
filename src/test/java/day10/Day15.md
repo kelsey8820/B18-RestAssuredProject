@@ -79,6 +79,14 @@ RestAssured.responseSpecification = expect()..somespec ;
         List<User> allUserLst = jp.getList("", User.class) ;
         System.out.println("allUserLst = " + allUserLst);
 ```
+ 4. get `List<Map<Integer,String> >` object from the response of **GET /get_book_categories**
+```java
+       // Each category is being saved into Map object 
+       // And the JsonArray is being saved into the List
+       // Jackson data-bind take care of all the conversion where it can 
+       List< Map<Integer,String> > categoryMapList = response.jsonPath().getList("");
+        System.out.println("categoryMapList = " + categoryMapList);
+```
 
 >hint : you will need to create 2 POJO class called `Category` , `User`; 
 ----
