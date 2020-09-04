@@ -70,6 +70,13 @@
             <version>1.18.12</version>
         </dependency>
 
+        <dependency>
+            <groupId>io.rest-assured</groupId>
+            <artifactId>json-schema-validator</artifactId>
+            <version>4.3.1</version>
+            <scope>test</scope>
+        </dependency>
+
     </dependencies>
 
 
