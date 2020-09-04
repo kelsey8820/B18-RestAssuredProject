@@ -22,7 +22,7 @@ then()
 ##  How to build ResponseSpecification object easily 
 
 ```java 
-    ResponseSpecification responseSpec = expect().statusCode(200).contentType(ContentType.JSON) ; 
+ResponseSpecification responseSpec = expect().statusCode(200).contentType(ContentType.JSON) ; 
 ```
 ----
 ## Practice what we learned with LibraryApp 
@@ -59,33 +59,33 @@ RestAssured.responseSpecification = expect()..somespec ;
 
     Solution : 
 ```java
-        Response response =  when().get(" /dashboard_stats").prettyPeek();
-        // here getMap method automatically converting String to number
-        // for the value data type `Integer` since it can be converted
-        Map<String,Integer> statMap = response.jsonPath().getMap("") ;
-        System.out.println("statMap = " + statMap);
+Response response =  when().get(" /dashboard_stats").prettyPeek();
+// here getMap method automatically converting String to number
+// for the value data type `Integer` since it can be converted
+Map<String,Integer> statMap = response.jsonPath().getMap("") ;
+System.out.println("statMap = " + statMap);
 ```
  2. get the `List<Category>` object from the response of **GET /get_book_categories**
 ```java
-         Response response = when()
-                 .get("/get_book_categories");
-         List<Category> categoryList = response.jsonPath().getList("", Category.class) ;
-        System.out.println("categoryList = " + categoryList);
+Response response = when()
+        .get("/get_book_categories");
+List<Category> categoryList = response.jsonPath().getList("", Category.class) ;
+System.out.println("categoryList = " + categoryList);
 ```
  3. get the `List<User>` object from the response of **GET /get_all_users**
 ```java 
-        Response response =  when().get(" /get_all_users");
-        JsonPath jp = response.jsonPath();
-        List<User> allUserLst = jp.getList("", User.class) ;
-        System.out.println("allUserLst = " + allUserLst);
+Response response =  when().get(" /get_all_users");
+JsonPath jp = response.jsonPath();
+List<User> allUserLst = jp.getList("", User.class) ;
+System.out.println("allUserLst = " + allUserLst);
 ```
  4. get `List<Map<Integer,String> >` object from the response of **GET /get_book_categories**
 ```java
-       // Each category is being saved into Map object 
-       // And the JsonArray is being saved into the List
-       // Jackson data-bind take care of all the conversion where it can 
-       List< Map<Integer,String> > categoryMapList = response.jsonPath().getList("");
-        System.out.println("categoryMapList = " + categoryMapList);
+// Each category is being saved into Map object 
+// And the JsonArray is being saved into the List
+// Jackson data-bind take care of all the conversion where it can 
+List< Map<Integer,String> > categoryMapList = response.jsonPath().getList("");
+System.out.println("categoryMapList = " + categoryMapList);
 ```
 
 >hint : you will need to create 2 POJO class called `Category` , `User`; 
@@ -106,7 +106,7 @@ Using Project lombok is 2 step process is IntelliJ Idea
     <version>1.18.12</version>
 </dependency>
  ```
-3. Add A IntelliJ Plugin called Lombok from the [Plugin website]("https://plugins.jetbrains.com/plugin/6317-lombok") 
+3. Add A IntelliJ Plugin called Lombok from the [Lombok Plugin Website](https://plugins.jetbrains.com/plugin/6317-lombok "plugin site") 
 
 or IntelliJ `Preference --search plugins --Marketplace-- Lombok` as below
 * Intall it and restart the IDE to take affect. (Say yes to any pop-up) 
@@ -177,7 +177,7 @@ Problem Set :
 
 Approach :
 > Since we know there are lots of data already exists, we just needed to pick the correct id, we decided to make a conneciton to the database and get the latest available data to run the test (also thought about getting random data each time.)
-
+---
 Steps : 
 1. Using utility to make a connection to `Spartan Database` and ran below query :  
 ```SQL 
@@ -185,11 +185,11 @@ Steps :
 ```
 2. Using the utility method `getRowMap(1)` to get the first row as `Map<String,String>` and saved it as appropriate data type: 
  ```java
-    Map<String, String> firstRowMap = DB_Utility.getRowMap(1);
-    int id = Integer.parseInt(firstRowMap.get("SPARTAN_ID"));
-    String name = firstRowMap.get("NAME");
-    String gender = firstRowMap.get("GENDER");
-    long phone =Long.parseLong(firstRowMap.get("PHONE"));
+Map<String, String> firstRowMap = DB_Utility.getRowMap(1);
+int id = Integer.parseInt(firstRowMap.get("SPARTAN_ID"));
+String name = firstRowMap.get("NAME");
+String gender = firstRowMap.get("GENDER");
+long phone =Long.parseLong(firstRowMap.get("PHONE"));
  ```
  3. Use the id to send the ```GET /spartans/{id}``` request using RestAssured. 
 ```java 
@@ -198,56 +198,56 @@ Steps :
  4. use the `name`,`gender`,`phone` we got from the DB as expected result to validate the json response we got from the request. 
 ```java 
     ...then()
-                .log().all()
-                .statusCode(200)
-                .body("id",  is(idFromDB) )
-                .body("name",  is(nameFromDB) )
-                .body("gender", is(genderFromDB))
-                // converting the phone to long to avoid error
-                .body("phone.toLong()", is(phoneFromDB) ) ;
+        .log().all()
+        .statusCode(200)
+        .body("id",  is(idFromDB) )
+        .body("name",  is(nameFromDB) )
+        .body("gender", is(genderFromDB))
+        // converting the phone to long to avoid error
+        .body("phone.toLong()", is(phoneFromDB) ) ;
 ```
- 5. Switched the different IP Addresses to see if it still work
- 6. _Pending_ : Some IPs did not return any data so planning to create data any time  ```SELECT count(*) FROM SPARTANS``` return 0; 
+ 5. Switched the different IP Addresses to see if it still work.
+ 6. _Pending_ : Some IPs did not return any data so planning to create data any time  ```SELECT count(*) FROM SPARTANS``` return `0`; 
  7. As time went by , we realized when we read the latest data, it's always reading same data since no new data has been created for a while. so we decided to randomize the data we got by doint below 
-   ```java
-     Map<String, String> firstRowMap = DB_Utility.getRowMap(RANDOM_ID_WITHIN_THE_RANGE);
-   ```
+```java
+Map<String, String> firstRowMap = DB_Utility.getRowMap(RANDOM_ID_WITHIN_THE_RANGE);
+```
 Our range is from row 1 till the last row count. 
 In order to get the last row count , we can call the utility method as below: 
-   ```java
-     int rowCount = DB_Utility.getRowCount();
-   ```
+```java
+int rowCount = DB_Utility.getRowCount();
+```
 In order to get random row number between 1 to row count, 
 we can use faker: 
-   ```java
-     int randomRowNum = new Faker().number().numberBetween(1, rowCount) ;
+```java
+int randomRowNum = new Faker().number().numberBetween(1, rowCount) ;
    ```
-Now when we call the method we are passing random row number each time. 
+Now when we call the method and we are passing random row number each time. 
 Our test is more robust and practical. 
 ```java 
 Map<String, String> randomRowMap = DB_Utility.getRowMap(randomRowNum);
-        System.out.println("CURRENT ROW IS "+ randomRowNum);
-        System.out.println("CURRENT ROW DATA IS "+ randomRowMap);
+System.out.println("CURRENT ROW IS "+ randomRowNum);
+System.out.println("CURRENT ROW DATA IS "+ randomRowMap);
 ```
 Saving the data from Database for the test use: 
 ```java
-        int idFromDB        = Integer.parseInt( randomRowMap.get("SPARTAN_ID") );
-        String nameFromDB   = randomRowMap.get("NAME") ;
-        String genderFromDB = randomRowMap.get("GENDER") ;
-        long phoneFromDB    = Long.parseLong(randomRowMap.get("PHONE"));
+int idFromDB        = Integer.parseInt( randomRowMap.get("SPARTAN_ID") );
+String nameFromDB   = randomRowMap.get("NAME") ;
+String genderFromDB = randomRowMap.get("GENDER") ;
+long phoneFromDB    = Long.parseLong(randomRowMap.get("PHONE"));
 ```
 Now we can take same rest assured action to make our test data and assertion dynamic in any environment that has data. 
 ```java
-       given()
-                .log().uri().
-        when()
-                .get("/spartans/{id}" , idFromDB ).
-                then()
-                .log().all()
-                .statusCode(200)
-                .body("id",  is(idFromDB) )
-                .body("name",  is(nameFromDB) )
-                .body("gender", is(genderFromDB))
-                .body("phone.toLong()", is(phoneFromDB) ) ;
+given()
+        .log().uri().
+when()
+        .get("/spartans/{id}" , idFromDB ).
+then()
+        .log().all()
+        .statusCode(200)
+        .body("id",  is(idFromDB) )
+        .body("name",  is(nameFromDB) )
+        .body("gender", is(genderFromDB))
+        .body("phone.toLong()", is(phoneFromDB) ) ;
 ```
 
