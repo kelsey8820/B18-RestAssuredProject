@@ -3,6 +3,7 @@ package day11;
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
 import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.RepeatedTest;
 import org.junit.jupiter.api.Test;
 import pojo.Spartan2;
 import utility.ConfigurationReader;
@@ -59,8 +60,9 @@ public class GettingDataFromOtherRequests {
 
 
      }
-
-     @Test
+     // Can I repeat certain test n number of times in Junit 5
+    //  use @RepeatedTest
+     @RepeatedTest(10)
      public void gettingRandomID_and_NameForEachTest(){
 
          Response response = get("/spartans");
@@ -71,6 +73,19 @@ public class GettingDataFromOtherRequests {
          Random r = new Random();
          int randomIndex  =  r.nextInt( spartan2List.size()  ) ;
          System.out.println("randomIndex = " + randomIndex);
+
+         Spartan2 randomSpartanObject =  spartan2List.get(  randomIndex  ) ;
+         System.out.println("randomSpartanObject = " + randomSpartanObject);
+
+         given()
+                 .pathParam("id" , randomSpartanObject.getId() ).
+         when()
+                 .get("/spartans/{id}").
+         then()
+                 .log().body()
+                 .statusCode(is(200))
+                 .body("name" , is(  randomSpartanObject.getName()   )  ) ;
+
 
      }
 
