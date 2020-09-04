@@ -8,6 +8,7 @@ import pojo.Spartan2;
 import utility.ConfigurationReader;
 
 import java.util.List;
+import java.util.Random;
 
 import static io.restassured.RestAssured.*;
 import static org.hamcrest.Matchers.*;
@@ -41,17 +42,35 @@ public class GettingDataFromOtherRequests {
          System.out.println("spartan2List = " + spartan2List);
 
          // get the first spartan id so we can send below request :
+         // we are calling list method get(0) to get first Spartan2 Object
+         // then we called getter method getId() from Spartan2 to get the value
          int firstSpartanIDFromTheList = spartan2List.get(0).getId() ;
+         String firstSpartanNameFromTheList =  spartan2List.get(0).getName() ;
+
          System.out.println("firstSpartanIDFromTheList = " + firstSpartanIDFromTheList);
          // GET /spartans/{id}
          given()
                  .pathParam("id", firstSpartanIDFromTheList).
          when()
-                 .get("/spartans/{id}")
-                 .prettyPeek();
+                 .get("/spartans/{id}").
+         then()
+                .statusCode(200)
+                .body("name" , is(firstSpartanNameFromTheList ) );
 
 
+     }
 
+     @Test
+     public void gettingRandomID_and_NameForEachTest(){
+
+         Response response = get("/spartans");
+         List<Spartan2> spartan2List = response.jsonPath().getList("",Spartan2.class);
+
+         // get random spartan object from the list each time
+         // our range for the index will be 0--->spartan2List.size()
+         Random r = new Random();
+         int randomIndex  =  r.nextInt( spartan2List.size()  ) ;
+         System.out.println("randomIndex = " + randomIndex);
 
      }
 
