@@ -1,9 +1,16 @@
 package day11;
 
 import io.restassured.RestAssured;
+import io.restassured.response.Response;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
+import pojo.Spartan2;
 import utility.ConfigurationReader;
+
+import java.util.List;
+
+import static io.restassured.RestAssured.*;
+import static org.hamcrest.Matchers.*;
 
 public class GettingDataFromOtherRequests {
 
@@ -28,6 +35,20 @@ public class GettingDataFromOtherRequests {
      */
      @Test
      public void testTheDynamicID(){
+
+         Response response = get("/spartans");
+         List<Spartan2> spartan2List = response.jsonPath().getList("",Spartan2.class);
+         System.out.println("spartan2List = " + spartan2List);
+
+         // get the first spartan id so we can send below request :
+         int firstSpartanIDFromTheList = spartan2List.get(0).getId() ;
+         System.out.println("firstSpartanIDFromTheList = " + firstSpartanIDFromTheList);
+         // GET /spartans/{id}
+         given()
+                 .pathParam("id", firstSpartanIDFromTheList).
+         when()
+                 .get("/spartans/{id}")
+                 .prettyPeek();
 
 
 
