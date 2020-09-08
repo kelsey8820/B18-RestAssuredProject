@@ -31,7 +31,10 @@ public class OpenMovieDB_XML {
                 // called title
                 .body("root.movie.@title" , is("The Boss Baby"))
                 // also validate year , rated , released , runtime
-
+                .body("root.movie.@year", is("2017"))
+                .body("root.movie.@rated", is("PG"))
+                .body("root.movie.@released", is("31 Mar 2017"))
+                .body("root.movie.@runtime", is("97 min"))
             ;
 
 
