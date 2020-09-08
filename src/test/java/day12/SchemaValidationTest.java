@@ -30,5 +30,18 @@ public class SchemaValidationTest {
 
     }
 
+    @DisplayName("Testing GET /Spartans/search response against Schema")
+    @Test
+    public void testSearchSpartansSchema(){
+
+        // search female in query param and validate response against schema
+        given()
+                .queryParam("gender","Female").
+        when()
+                .get("/spartans/search").
+        then()
+                .body(matchesJsonSchemaInClasspath("SearchSchema.json") ) ;
+
+    }
 
 }
