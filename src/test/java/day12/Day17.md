@@ -12,20 +12,20 @@
 
 ### Solution 
 ```java
-        when()
-            .get("/spartans").
-        then()
-            .body(matchesJsonSchemaInClasspath("AllSpartansSchema.json") ) ;
+    when()
+        .get("/spartans").
+    then()
+        .body(matchesJsonSchemaInClasspath("AllSpartansSchema.json") ) ;
 ```
 
 ```java
-        // search female in query param
-        given()
-                .queryParam("gender","Female").
-        when()
-                .get("/spartans/search").
-        then()
-                .body(matchesJsonSchemaInClasspath("SearchSchema.json") ) ;
+    // search female in query param
+    given()
+            .queryParam("gender","Female").
+    when()
+            .get("/spartans/search").
+    then()
+            .body(matchesJsonSchemaInClasspath("SearchSchema.json") ) ;
 ```
 > what if my schema file is not under resources folder ? 
 > then `matchesJsonSchemaInClasspath` will not work because it only look for schema under resources folder.
@@ -52,10 +52,15 @@ Solution :
 - `matchesJsonSchema` will look for the schema file according to the path you provided
 
 
+--- 
 ## How to work with XML Response 
 RestAssured support validating xml response natively using `XMLPath` just like it does for json response using `JSONPath`.
 
-The Syantax for finding the path is similar to JsonPath 
+You can use [this website](https://codebeautify.org/xmlviewer#) to see the structure better. 
+![Code Beautifier ](../../resources/gifs/How_To-See_XML_Structire_Better.png)
+
+
+The Syntax for finding the path is similar to JsonPath 
 
 For example : 
 Response for this request is as below for department of transportation api: 
@@ -165,6 +170,7 @@ when()
 	<movie title="The Boss Baby" year="2017" rated="PG" released="31 Mar 2017" runtime="97 min" genre="Animation, Adventure, Comedy, Family, Fantasy" director="Tom McGrath" writer="Michael McCullers, Marla Frazee (based on the book by)" actors="Alec Baldwin, Steve Buscemi, Jimmy Kimmel, Lisa Kudrow" plot="A suit-wearing, briefcase-carrying baby pairs up with his 7-year old brother to stop the dastardly plot of the CEO of Puppy Co." language="English, Spanish" country="USA" awards="Nominated for 1 Oscar. Another 4 wins &amp; 20 nominations." poster="https://m.media-amazon.com/images/M/MV5BMTg5MzUxNzgxNV5BMl5BanBnXkFtZTgwMTM2NzQ3MjI@._V1_SX300.jpg" metascore="50" imdbRating="6.3" imdbVotes="105,081" imdbID="tt3874544" type="movie"/>
 </root>
 ```
+![Code Beautifier ](../../resources/gifs/How_to_See_XML_Structure_better_with_attrinutes.png)
 
 In order to get to the movie element we would do : 
 
