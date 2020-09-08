@@ -105,7 +105,7 @@ public class SpartanXML_Test {
         System.out.println("uniqueNames = " + uniqueNames);
 
         System.out.println("uniqueNames.size() = " + uniqueNames.size() );
-        System.out.println("allNames = " + allNames);
+        System.out.println("allNames.size() = " + allNames.size()  );
 
 
 

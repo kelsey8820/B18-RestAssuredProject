@@ -36,9 +36,6 @@ public class OpenMovieDB_XML {
                 .body("root.movie.@released", is("31 Mar 2017"))
                 .body("root.movie.@runtime", is("97 min"))
             ;
-
-
-
     }
 
 
