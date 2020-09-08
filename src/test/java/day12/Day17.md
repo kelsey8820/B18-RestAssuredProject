@@ -199,7 +199,51 @@ then().
         .body("root.movie.@year", is("2017"));
 ```
 
+--- 
 
+## Practcice XML Response using `GET /Spartans` 
+
+* Create a class called `SpartanXML_Test`
+* Add `@BeforeAll` method to set up your baseURI and basePath 
+* Create a Test and send `GET /Spartans` by specifying `accept` header as xml. 
+* Verify you get `xml` as response `content type`. 
+* Verify the first spartan `name`,  `id` , `gender` . 
+
+>The Sample Response
+```xml
+<List>
+    <item>
+        <id>31</id>
+        <name>Kaye</name>
+        <gender>Female</gender>
+        <phone>6234567890</phone>
+    </item>
+    <item>
+        <id>290</id>
+        <name>Irina Li</name>
+        <gender>Female</gender>
+        <phone>1231231231</phone>
+    </item>
+    <item>
+        <id>302</id>
+        <name>Jazzy</name>
+        <gender>Female</gender>
+        <phone>4154154151</phone>
+    </item>
+    <item>
+        <id>42</id>
+        <name>Adam</name>
+        <gender>Female</gender>
+        <phone>6234567890</phone>
+    </item>
+    <item>
+        <id>44</id>
+        <name>From File</name>
+        <gender>Female</gender>
+        <phone>6234567890</phone>
+    </item>
+<List>
+```
 
 
 
