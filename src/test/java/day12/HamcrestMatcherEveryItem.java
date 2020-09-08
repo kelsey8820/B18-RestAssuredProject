@@ -20,6 +20,8 @@ public class HamcrestMatcherEveryItem {
         assertThat(nums, everyItem(  greaterThan(0)    )   );
 
         assertThat(nums, everyItem(  lessThan(20)    )   );
+        // assert all numbers between 0-11
+        assertThat(nums, everyItem( allOf( greaterThan(0), lessThan(11) )  ) );
 
         // create a list of String and check each item has length of 4
         String  str = "abc";
