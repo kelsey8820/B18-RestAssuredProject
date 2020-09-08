@@ -2,7 +2,12 @@ package day12;
 
 import io.restassured.RestAssured;
 import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import utility.ConfigurationReader;
+
+import static io.restassured.RestAssured.*;
+import static io.restassured.module.jsv.JsonSchemaValidator.*;
 
 public class SchemaValidationTest {
 
@@ -14,6 +19,16 @@ public class SchemaValidationTest {
         RestAssured.basePath = "/api";
     }
 
+    @DisplayName("Testing GET /Spartans response against Schema")
+    @Test
+    public void testAllSpartansSchema(){
+
+        when()
+            .get("/spartans").
+        then()
+            .body(matchesJsonSchemaInClasspath("AllSpartansSchema.json") ) ;
+
+    }
 
 
 }
