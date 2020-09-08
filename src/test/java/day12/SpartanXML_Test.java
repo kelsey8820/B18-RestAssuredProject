@@ -8,7 +8,11 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import utility.ConfigurationReader;
+
+import java.util.List;
+
 import static io.restassured.RestAssured.*;
+import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
 
 public class SpartanXML_Test {
@@ -58,6 +62,20 @@ public class SpartanXML_Test {
         long firstPhone = xp.getLong("List.item[0].phone");
         System.out.println("firstPhone = " + firstPhone);
 
+        // get all the ids and store it into the list
+        List<Integer> idList = xp.getList("List.item.id" , Integer.class) ;
+        System.out.println("idList = " + idList);
+
+        // assert the list size is some number
+        // assert above list has items 424 , 592 , 77
+        // import static org.hamcrest.MatcherAssert.assertThat;
+        // practice hamcrest matcher
+        assertThat( idList ,hasSize(479)  ) ;
+        // when we got the List<Integer> without specifying what type in getList method
+        // somehow it can not decide the in the Hamcrest assertThat method it's a List<Integer>
+        // so the fix was to provide class type for the getList method to make it obvious
+        // like this  List<Integer> idList = xp.getList("List.item.id", Integer.class) ;
+        assertThat(idList, hasItems(424,592,77) );
 
 
     }
