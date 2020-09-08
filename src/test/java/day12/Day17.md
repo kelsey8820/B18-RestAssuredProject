@@ -244,8 +244,23 @@ then().
     </item>
 <List>
 ```
+#### XML path for first `id` , `name` , `gender`
 
+    List.item[0].name
+    List.item[0].gender
+    List.item[0].id
 
-
+> Solution 
+```java
+    given()
+            .accept(ContentType.XML).
+    when()
+            .get("/spartans").
+    then()
+            .contentType(ContentType.XML)
+            .body("List.item[0].name", is("Mina") )
+            .body("List.item[0].gender", is("Male"))
+            .body("List.item[0].id", is("424"))
+```
 
   

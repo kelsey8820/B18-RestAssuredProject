@@ -77,6 +77,25 @@ public class SpartanXML_Test {
         // like this  List<Integer> idList = xp.getList("List.item.id", Integer.class) ;
         assertThat(idList, hasItems(424,592,77) );
 
+        // Get a List of Long from the phone numbers
+        // first check the size is 479
+        // check it has few phone numbers you specified
+        // optionally --
+        // check every item is greaterThan 1000000000
+        List<Long> phoneNums = xp.getList("List.item.phone", Long.class);
+        System.out.println("phone Nums = " + phoneNums);
+
+        assertThat(phoneNums, hasSize(479) );
+        //9876543210, 7685940321, 7234567890
+        assertThat(phoneNums, hasItems(9876543210L, 7685940321L, 7234567890L) );
+
+        // How to check every item in the collection match certain criteria
+        // assertThat( 5 , greaterThan(3) );
+
+        assertThat(phoneNums, everyItem( greaterThan(1000000000L)  )  );
+
+        // Get a List of String from the names
+        // find out how many unique names you have
 
     }
 
