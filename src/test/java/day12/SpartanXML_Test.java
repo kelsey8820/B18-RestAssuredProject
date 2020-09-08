@@ -1,6 +1,7 @@
 package day12;
 
 import io.restassured.RestAssured;
+import io.restassured.http.ContentType;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -21,6 +22,18 @@ public class SpartanXML_Test {
     @Test
     public void testSpartanXML(){
 
+        given()
+                .accept(ContentType.XML).
+        when()
+                .get("/spartans").
+        then()
+                .contentType(ContentType.XML)
+                .body("List.item[0].name", is("Mina") )
+                .body("List.item[0].gender", is("Male"))
+                .body("List.item[0].id", is("424"))
+
+        ;
+        // XMLPath xp = response.xmlPath();
 
 
     }
