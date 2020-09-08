@@ -42,7 +42,7 @@ public class HamcrestMatcherEveryItem {
         assertThat(myAwesomeNumber, allOf(  greaterThan(0) , lessThan(50)   )    );
 
         // Now you can try this for your list of numbers
-
+        // check each and every item in your first number list is in between 0-50
 
 
     }
