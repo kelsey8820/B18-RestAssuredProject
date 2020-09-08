@@ -9,7 +9,9 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import utility.ConfigurationReader;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import static io.restassured.RestAssured.*;
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -70,7 +72,7 @@ public class SpartanXML_Test {
         // assert above list has items 424 , 592 , 77
         // import static org.hamcrest.MatcherAssert.assertThat;
         // practice hamcrest matcher
-        assertThat( idList ,hasSize(479)  ) ;
+        assertThat( idList ,hasSize(485)  ) ;
         // when we got the List<Integer> without specifying what type in getList method
         // somehow it can not decide the in the Hamcrest assertThat method it's a List<Integer>
         // so the fix was to provide class type for the getList method to make it obvious
@@ -85,7 +87,7 @@ public class SpartanXML_Test {
         List<Long> phoneNums = xp.getList("List.item.phone", Long.class);
         System.out.println("phone Nums = " + phoneNums);
 
-        assertThat(phoneNums, hasSize(479) );
+        assertThat(phoneNums, hasSize(485) );
         //9876543210, 7685940321, 7234567890
         assertThat(phoneNums, hasItems(9876543210L, 7685940321L, 7234567890L) );
 
@@ -93,9 +95,19 @@ public class SpartanXML_Test {
         // assertThat( 5 , greaterThan(3) );
 
         assertThat(phoneNums, everyItem( greaterThan(1000000000L)  )  );
-
         // Get a List of String from the names
         // find out how many unique names you have
+        List<String> allNames = xp.getList("List.item.name");
+        System.out.println("allNames = " + allNames);
+        // Set interface define collection of unique elements
+        // creating a HashSet object by copying everything from List , duplicates are auto-removed
+        Set<String> uniqueNames = new HashSet<>(  allNames  );
+        System.out.println("uniqueNames = " + uniqueNames);
+
+        System.out.println("uniqueNames.size() = " + uniqueNames.size() );
+        System.out.println("allNames = " + allNames);
+
+
 
     }
 
