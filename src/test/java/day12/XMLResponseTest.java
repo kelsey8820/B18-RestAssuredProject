@@ -2,6 +2,7 @@ package day12;
 
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
+import io.restassured.path.xml.XmlPath;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
@@ -28,11 +29,16 @@ public class XMLResponseTest {
         when()
                 .get("/GetMakeForManufacturer/988").
         then()
-                .log().all()
+                //.log().all()
                 .statusCode(200)
                 .contentType(ContentType.XML)
                 // the path must match , and the value is always String in xml
                 .body("Response.Count" , is("2") )
+                .body("Response.Message", is("Results returned successfully"))
+                // find out the first Make_ID under the result by providing the index in the path
+                .body("Response.Results.MakesForMfg[0].Make_ID", is("474"))
+                // check the Make_Name in second result is Acura
+                .body("Response.Results.MakesForMfg[1].Make_Name", is("ACURA") )
 
                 ;
 
