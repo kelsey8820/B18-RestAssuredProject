@@ -147,7 +147,7 @@ when()
 ---- 
 ### Validating the XML element attribute 
 
->Unlike JSON xml elements can have attributes like : 
+>Unlike JSON, XML elements can have attributes like : 
 
 ```html
 <span class="label label-success">Optional*</span>
@@ -180,7 +180,7 @@ In order to get to the movie element attribute
 
 `root.movie.@attrinuteNameHere`
 
-### Solition :
+### Solution :
 ```java 
  given()
         .log().all()
@@ -263,7 +263,7 @@ then().
             .body("List.item[0].id", is("424"))
 ```
 
-### Working with `XMLPath` to extract data
+### Working with `XmlPath` to extract data
 
 ```java
 //Save the response Object 
