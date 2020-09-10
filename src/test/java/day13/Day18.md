@@ -149,9 +149,9 @@ Or you can directly import the collection with all the post request by clicking 
 * Body is enclosed in envelop like structure for example :
 
 Sample Post request to turn number into word 
-* `POST https://www.dataaccess.com/webservicesserver/NumberConversion.wso` 
+* Request :  `POST https://www.dataaccess.com/webservicesserver/NumberConversion.wso` 
 
-* `Header` : `text/xml; charset=utf-8`
+* Header : `Content Type` : `text/xml; charset=utf-8`
 * Body : 
 ```xml 
 <?xml version="1.0" encoding="utf-8"?>
