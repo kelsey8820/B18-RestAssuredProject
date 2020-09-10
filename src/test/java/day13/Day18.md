@@ -62,7 +62,7 @@ What do we have in the request and response :
   - It's part or url directly `/spartans/{id}`
     - `https://yourip:8000/spartans/10`
   - Usually cleary defined in the doc either use `:name` or `{name}`
-- #### Body 
+- #### Body (Payload)
   - Exists in `POST` , `PUT` , `Patch`
   - The contentype can be anything according to the doc.
   - Common contentype we have seen so far: 
@@ -117,6 +117,61 @@ What do we have in the request and response :
     - `503 Service Unavailable`
       - The server is currently unable to handle the request due to a temporary overload or scheduled maintenance, which will likely be alleviated after some delay.
 
-- Body 
+- Body  (Payload)
+  - The actual resource we got from the server 
+  - Contentype can be 
+    - plain text 
+    - xml, html 
+    - json 
+    - or any other types 
 - Header 
+  - The meta data about the response to provide more information  
 - cookie
+- Time (spent to get this response)
+
+----- 
+
+## Soap Request : 
+Here is the example provided by postman in the [doc](https://learning.postman.com/docs/sending-requests/supported-api-frameworks/making-soap-requests/) 
+
+You can see more example by looking at this [doc](https://documenter.getpostman.com/view/8854915/Szf26WHn?version=latest&_ga=2.111743751.265151840.1599750425-735093615.1589812348)
+
+Or you can directly import the collection with all the post request by clicking on this button : [![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/3bf2daab4832964def44)
+
+### Soap : 
+    Simple Object Access Protocol 
+* It has strict rule on how to send request and response. 
+
+* Soap Request use `XML` format to send and receive response 
+
+* Only method allowed in SOAP is `POST`
+* The content type is always xml 
+* Body is enclosed in envelop like structure for example :
+
+Sample Post request to turn number into word 
+* `POST https://www.dataaccess.com/webservicesserver/NumberConversion.wso` 
+
+* `Header` : `text/xml; charset=utf-8`
+* Body : 
+```xml 
+<?xml version="1.0" encoding="utf-8"?>
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
+  <soap:Body>
+    <NumberToWords xmlns="http://www.dataaccess.com/webservicesserver/">
+      <ubiNum>123456789</ubiNum>
+    </NumberToWords>
+  </soap:Body>
+</soap:Envelope>
+```
+> Response 
+```xml
+<?xml version="1.0" encoding="utf-8"?>
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
+    <soap:Body>
+        <m:NumberToWordsResponse xmlns:m="http://www.dataaccess.com/webservicesserver/">
+            <m:NumberToWordsResult>one hundred and twenty three million four hundred and fifty six thousand seven hundred and eighty nine </m:NumberToWordsResult>
+        </m:NumberToWordsResponse>
+    </soap:Body>
+</soap:Envelope>
+```
+
