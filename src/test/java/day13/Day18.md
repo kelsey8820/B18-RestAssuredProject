@@ -138,7 +138,10 @@ You can see more example by looking at this [doc](https://documenter.getpostman.
 
 Or you can directly import the collection with all the post request by clicking on this button : [![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/3bf2daab4832964def44)
 
-### Soap : 
+
+
+
+### SOAP : 
     Simple Object Access Protocol 
 * It has strict rule on how to send request and response. 
 
@@ -149,9 +152,9 @@ Or you can directly import the collection with all the post request by clicking 
 * Body is enclosed in envelop like structure for example :
 
 Sample Post request to turn number into word 
-* Request :  `POST https://www.dataaccess.com/webservicesserver/NumberConversion.wso` 
+* `POST https://www.dataaccess.com/webservicesserver/NumberConversion.wso` 
 
-* Header : `Content Type` : `text/xml; charset=utf-8`
+* `Header` : `text/xml; charset=utf-8`
 * Body : 
 ```xml 
 <?xml version="1.0" encoding="utf-8"?>
@@ -174,4 +177,19 @@ Sample Post request to turn number into word
     </soap:Body>
 </soap:Envelope>
 ```
+
+## Tools to send API request 
+* Postman       -- `Desktop client tool`
+* Curl          -- `Command line client tool`
+* RestAssured   -- `Java client library`
+* SoapUI        -- `Desktop client tool`
+
+A lot of API documentation provide curl command example run the request and Postman can easily import curl command without you manually typing the whole part of the request. 
+
+### How to easily import curl command as Postman Request
+![How_to_import_curl_command_to_postman_request](https://user-images.githubusercontent.com/59104509/92767551-3b475b00-f365-11ea-916a-c0de1e24d0c5.gif)
+
+### How to generate curl command from Postman Request
+
+![How_to_generate_curl_command_from_Postman_Request](https://user-images.githubusercontent.com/59104509/92767785-6fbb1700-f365-11ea-9177-710142aa0f04.gif)
 
