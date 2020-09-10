@@ -25,7 +25,7 @@ public class Test_oAuth2ExampleInRestAssured {
     @Test
     public void test(){
 
-        String accessToken =
+           String accessToken =
                 given()
                         .queryParam("email","jalabaster7f@drupal.org")
                         .queryParam("password", "terimapam").
@@ -42,9 +42,11 @@ public class Test_oAuth2ExampleInRestAssured {
          */
         // send GET /api/rooms to get all the rooms
         given()
-                .header("Authorization", "Bearer "+ accessToken).
+//                .header("Authorization", "Bearer "+ accessToken)
+                  .auth().oauth2(accessToken)
+                  .log().all().
         when()
-                .get("/api/room").
+                .get("/api/rooms").
         then()
                 .log().all()
                 .statusCode(200)

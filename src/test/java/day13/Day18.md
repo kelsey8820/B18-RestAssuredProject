@@ -173,6 +173,44 @@ What do we have in the request and response :
 * When the credentails or the token is not provided --> `401`
 * When the crenentials or the token does not have permission --> `403`
 
+### BookIT API oAuth2 example 
+BookIT api use oAuth2 for authoriaztion , generating the access token is much simplified and the token does not expire. 
+
+#### Task 
+   1. Send a request to `GET https://cybertek-reservation-api-qa.herokuapp.com/sign` Endpoint with below 2 query parameters 
+      * email=jalabaster7f@drupal.org
+      * password=terimapam 
+      * Save the token that generated 
+   2. Send a request to `GET https://cybertek-reservation-api-qa.herokuapp.com/api/rooms` 
+      * provide the `Authorization` header as `Bearer yourTokenHere`
+      * or use the RestAssured method `auth().oauth2("Token here) 
+> Solution : 
+
+```java 
+// Code for getting the token
+String accessToken =
+  given()
+          .queryParam("email","jalabaster7f@drupal.org")
+          .queryParam("password", "terimapam").
+  when()
+          .get("/sign").prettyPeek()
+          .path("accessToken") ;
+```
+
+```java
+// code for using the token in 2 different ways : 
+  given()
+//                .header("Authorization", "Bearer "+ accessToken)
+            .auth().oauth2(accessToken)
+            .log().all().
+  when()
+          .get("/api/rooms").
+  then()
+          .log().all()
+          .statusCode(200)
+          .contentType(ContentType.JSON)
+```
+
 ----- 
 
 ## Soap Request : 
