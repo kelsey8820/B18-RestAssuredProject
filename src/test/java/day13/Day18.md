@@ -210,6 +210,29 @@ String accessToken =
           .statusCode(200)
           .contentType(ContentType.JSON)
 ```
+### How to transfer data between requests in Postman
+  We can use the variable (`Env variable` , `Global variable`)
+  #### Steps : 
+ * Create a global variable called `my_secret_token` with empty value
+ * save the entire response as json 
+ * print out the accessToken field from response
+ * set the value of global variable to json field
+  
+```javaScript
+var responseJson = pm.response.json(); 
+console.log( responseJson.accessToken  );
+pm.globals.set("my_secret_token",  responseJson.accessToken );
+```   
+![Saving_Response_Json_as_Object_and_Print_Its_Field](https://user-images.githubusercontent.com/59104509/92794984-098ebe00-f37e-11ea-9930-d1954be28959.png)
+
+![Setting_the_value_of_global_variable_from_json_field](https://user-images.githubusercontent.com/59104509/92795069-190e0700-f37e-11ea-8ab8-d84d462ae4bf.png)
+
+* Use this variable for next request
+![Using_it_in_next_Request](https://user-images.githubusercontent.com/59104509/92795908-c08b3980-f37e-11ea-9cf3-65ca0c91f56c.png))
+
+
+
+
 
 ----- 
 
