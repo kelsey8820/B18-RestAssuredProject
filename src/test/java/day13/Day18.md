@@ -211,6 +211,9 @@ String accessToken =
           .contentType(ContentType.JSON)
 ```
 ### How to transfer data between requests in Postman
+
+  Here is the collection : [![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/a371e0cecef83d59af15)
+  
   We can use the variable (`Env variable` , `Global variable`)
   #### Steps : 
  * Create a global variable called `my_secret_token` with empty value
