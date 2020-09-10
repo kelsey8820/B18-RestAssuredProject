@@ -213,7 +213,7 @@ String accessToken =
 ### How to transfer data between requests in Postman
 
   Here is the collection : [![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/a371e0cecef83d59af15)
-  
+
   We can use the variable (`Env variable` , `Global variable`)
   #### Steps : 
  * Create a global variable called `my_secret_token` with empty value
@@ -234,7 +234,8 @@ pm.globals.set("my_secret_token",  responseJson.accessToken );
 ![Using_it_in_next_Request](https://user-images.githubusercontent.com/59104509/92795908-c08b3980-f37e-11ea-9cf3-65ca0c91f56c.png))
 
 
-
+### Handling Cookie in Postman 
+Here is the collection : [![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/07efb5040d033f07788f)
 
 
 ----- 
