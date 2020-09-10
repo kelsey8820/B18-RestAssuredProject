@@ -134,16 +134,16 @@ What do we have in the request and response :
 * Authentication :
   * Telling the system who you are , proving the identity against who you say you are.  
 * Authorization : 
-  * Things you can do according to who are, The permission attacted to your identity.
+  * Things you can do according to who you are, The permission attached to your identity.
 
 ### Few ways of making authorized request
   - Basic Auth 
-    - providing username and papssword along with each request.
+    - providing username and password along with each request.
     - For example 
       - The spartan app with basic auth 
       - if username and password not provided we will get 401
       - Github API also support basic auth 
-      - It also support providing token instead of password by generating the personal token by logging into your account and clicking on this [link](https://github.com/settings/tokens)
+      - It also supports providing token instead of password by generating the personal token by logging into your account and clicking on this [link](https://github.com/settings/tokens)
   
   - API Keys
     - A token provided by the api vendor , to identify who you are and track your usage and authorize the requests 
@@ -173,7 +173,7 @@ What do we have in the request and response :
 * When the crenentials or the token does not have permission --> `403`
 
 ### BookIT API oAuth2 example 
-BookIT api use oAuth2 for authoriaztion , generating the access token is much simplified and the token does not expire. 
+BookIT api use oAuth2 for authorization , generating the access token is much simplified and the token does not expire. 
 
 #### Task 
    1. Send a request to `GET https://cybertek-reservation-api-qa.herokuapp.com/sign` Endpoint with below 2 query parameters 
