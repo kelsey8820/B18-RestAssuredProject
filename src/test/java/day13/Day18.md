@@ -104,7 +104,6 @@ What do we have in the request and response :
         - For example : 
           - `/spartans/{id}` only support json and if we put `accept` header value to `xml` We get this status code. 
   
-
     - `415 Unsupported`
       - Server is expecting to get the body in certain content type , but the client sent unsupported content type
       - For example : `POST /api/spartans` only accept `json` as content type. if you forget to add the content type, it will automatically assume you are sending `plain/text` and we get this error.
@@ -236,6 +235,44 @@ pm.globals.set("my_secret_token",  responseJson.accessToken );
 
 ### Handling Cookie in Postman 
 Here is the collection : [![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/07efb5040d033f07788f)
+
+
+Cookie in rest request , just like on the website , used to store some common information about where the request originated. for example , while you shop online , once you view certain items , next time to go to the website it will always suggest similar item beacuse it can access the cookie that contain those information. 
+
+#### Postman 
+* We have a button called cookie to give us a way to add cookie to certain domain. by providing the key-value pair (optionally expration date)
+* Once added , any request sent to the same domain , can access that cookie 
+* You can also programmitically access the cookie in the test tab
+  
+> This code is checking we have 2 cookies as below 
+>   B18 : AWESOME   AND  Motto : Hold your horse
+
+```javaScript
+pm.test('the "B18" cookie has correct value', function () {
+    pm.expect(pm.cookies.toObject()).to.have.property('B18', 'AWESOME');
+});
+
+pm.test('the "Motto" cookie has correct value', function () {
+    pm.expect(pm.cookies.toObject()).to.have.property('Motto', 'Hold your horse');
+});
+```
+
+### RestAssured adding Cookie 
+  More information can be found in the doc [here](https://github.com/rest-assured/rest-assured/wiki/Usage#cookies).
+
+  > Try it out with this request : https://postman-echo.com/cookies
+  > Try to add 2 cookies in the requests by following the doc. 
+
+
+
+
+
+
+
+
+
+
+
 
 
 ----- 
