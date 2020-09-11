@@ -160,7 +160,7 @@ What do we have in the request and response :
     - The flow is similar to `Login with facabook,google`
     - Eventually the token still get added to the `Authorization` header.
 
->How did you authrize your request in your application ? and what happen if you don't?
+>How did you authorize your request in your application ? and what happen if you don't?
 
 * One of the internal project I worked on use basic auth , and we just provide the username , password for each request to make authorize request
 * Another project I worked on have 2 options 
