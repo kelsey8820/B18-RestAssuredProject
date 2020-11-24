@@ -384,7 +384,7 @@ Madina,Female,7657654321
 
 
 ### How to use Chrome developer -> Netwrok tab to see the requests being made. 
- Pictire will be here 
+ ![capturing_request_from_chrome_developer_tab](https://user-images.githubusercontent.com/59104509/100050552-a8f11800-2de7-11eb-89ce-709984891f05.png)
 
 
 ## RestAssured : 
